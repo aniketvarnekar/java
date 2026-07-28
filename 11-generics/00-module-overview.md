@@ -10,7 +10,7 @@ Throughout Modules 05–10, you've written `List<String>`, `Map<String, Integer>
 2. **[Generic Methods](02-generic-methods.md)** — writing your own generic methods, independent of generic classes, and type inference.
 3. **[Bounded Types & Wildcards](03-bounded-types-and-wildcards.md)** — `extends`/`super` bounds, wildcards (`?`, `? extends`, `? super`), and the PECS principle.
 4. **[Type Erasure](04-type-erasure.md)** — how generics are actually implemented by the compiler, what gets erased, and the real, concrete consequences and limitations this creates.
-5. **[Module Summary, Interview Questions & Exercises](05-module-summary-exercises.md)** — consolidated recap, quiz, and practice problems.
+5. **[Module Summary](05-module-summary.md)** — consolidated recap.
 
 ## Prerequisites
 
@@ -21,7 +21,3 @@ Throughout Modules 05–10, you've written `List<String>`, `Map<String, Integer>
 ## How to Study This Module
 
 Topics 1–2 build the practical vocabulary; Topic 3 (wildcards, PECS) is the part most learners find genuinely difficult on first exposure — expect to reread it. Topic 4 (type erasure) is the payoff: once you understand that generics are a **compile-time-only** feature, several previously-confusing rules (why you can't do `new T[]`, why `list instanceof List<String>` doesn't compile) become obvious logical consequences rather than arbitrary restrictions.
-
----
-
-**Previous module:** [10 — Collections](../10-collections/00-module-overview.md) · **Next:** [01 — Why Generics — Introduction](01-why-generics-introduction.md)

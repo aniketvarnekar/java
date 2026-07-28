@@ -133,7 +133,7 @@ This is the industry-standard mnemonic (coined by Joshua Bloch, a genuinely famo
 ```
  PRODUCER  (you READ values OUT)      ──▶  use  ?  extends  T
  CONSUMER  (you WRITE values IN)      ──▶  use  ?  super     T
- BOTH (read AND write)                  ──▶  use  T  directly (no wildcard) -- accept only the EXACT type
+ BOTH (read AND write)                ──▶  use  T  directly (no wildcard) -- accept only the EXACT type
 ```
 
 ```java
@@ -203,14 +203,3 @@ Think of `? extends Number` like a **"deliveries only" dock** — trucks can dro
 - Generics are **invariant** by design: `List<Integer>` and `List<Object>` are unrelated types, deliberately closing the unsafe loophole array covariance historically leaves open.
 - **`? extends T`** ("producer," read-only) and **`? super T`** ("consumer," write-only) are the controlled, safe escape hatches for needed flexibility.
 - **PECS** ("Producer Extends, Consumer Super") is the reliable mnemonic for choosing correctly between them.
-
-## Exercises
-
-1. Explain, using the hypothetical unsafe-assignment example from this topic, precisely why `List<Integer> objects = someListOfObject;`-style covariant assignment would be dangerous if generics allowed it.
-2. Write a method `static double sumAll(List<? extends Number> list)` and explain, referencing PECS, why `? extends Number` (not `? super Number` or a plain `List<Number>`) is the correct choice here.
-3. Given `Collections.copy(List<? super T> dest, List<? extends T> src)`, explain in your own words why `dest` uses `? super T` and `src` uses `? extends T`, applying PECS directly.
-4. Explain why `List<?> list` (unbounded wildcard) is an appropriate parameter type for a method that only calls `list.size()`, and why `List<Object>` would be a worse choice for the same method.
-
----
-
-**Previous:** [02 — Generic Methods](02-generic-methods.md) · **Next:** [04 — Type Erasure](04-type-erasure.md)
