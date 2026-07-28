@@ -11,7 +11,7 @@ Module 01, Topic 2's version timeline flagged Java 8 (2014) as "the biggest phil
 3. **[Method References](03-method-references.md)** — the four kinds, and when they're clearer than an equivalent lambda.
 4. **[Built-In Functional Interfaces](04-built-in-functional-interfaces.md)** — `Function`, `Supplier`, `Consumer`, `Predicate`, and composing them.
 5. **[`Optional`](05-optional.md)** — Java 8's answer to `null`-related bugs, correct usage, and real anti-patterns.
-6. **[Module Summary, Interview Questions & Exercises](06-module-summary-exercises.md)** — consolidated recap, quiz, and practice problems.
+6. **[Module Summary](06-module-summary.md)** — consolidated recap.
 
 ## Prerequisites
 
@@ -23,7 +23,3 @@ Module 01, Topic 2's version timeline flagged Java 8 (2014) as "the biggest phil
 ## How to Study This Module
 
 Topic 1 is the conceptual key that unlocks everything else — understanding *why* a lambda can only exist where a functional interface is expected (not "anywhere," despite how flexible lambda syntax feels) prevents a lot of confusion in Topics 2–4. Topic 5 (`Optional`) is a smaller, more self-contained topic, but a genuinely important one for writing idiomatic modern Java.
-
----
-
-**Previous module:** [16 — JVM Internals](../16-jvm-internals/00-module-overview.md) · **Next:** [01 — Functional Interfaces](01-functional-interfaces.md)

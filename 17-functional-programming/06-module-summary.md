@@ -1,4 +1,4 @@
-# Module 17 Summary, Interview Questions & Exercises
+# Module 17 Summary
 
 ## Topic Coverage Verification
 
@@ -27,39 +27,6 @@ Every topic promised in the [Module Overview](00-module-overview.md) has been co
 | `Optional.get()` vs `.map()`/`.orElse()` | `.get()` without checking reproduces the exact bug `Optional` prevents; the functional-chaining style handles absence safely and idiomatically. |
 | `Function<Integer,Integer>` vs `IntUnaryOperator` | The former autoboxes every call; the latter avoids boxing entirely — relevant for high-iteration-count code (Module 18). |
 
-## Consolidated Interview Questions (Module 17)
-
-1. What is a functional interface, precisely?
-2. Is `@FunctionalInterface` required for an interface to be usable with a lambda?
-3. Why must local variables captured by a lambda be effectively final?
-4. Does the effectively-final restriction apply to instance fields captured by a lambda?
-5. What's the structural difference between a lambda and an equivalent anonymous class?
-6. What are the four kinds of method references?
-7. What does `String::length` mean, given there's no specific object mentioned?
-8. What are the four core `java.util.function` interfaces?
-9. Why do primitive-specialized functional interfaces exist?
-10. What's the difference between `andThen` and `compose`?
-11. What problem does `Optional` solve?
-12. Why is calling `.get()` on an `Optional` without checking presence an anti-pattern?
-13. Why is using `Optional` as a field type discouraged?
-
-*(Full reasoning for every answer is in the respective topic file.)*
-
-## Module Exercises
-
-1. **Recall test:** From memory, state the "exactly one abstract method" rule and explain why it's what makes lambdas possible within Java's static type system.
-2. **Hands-on:** Write a custom `@FunctionalInterface` and implement it three ways: an anonymous class, a lambda, and (if applicable) a method reference — compare all three.
-3. **Hands-on:** Write a method returning `Optional<User>`, and a caller using `.map(...).filter(...).orElseThrow(...)` to process the result safely.
-4. **Hands-on:** Benchmark (conceptually or with `System.nanoTime()`) a tight loop using `Predicate<Integer>` versus `IntPredicate`, and explain the expected difference referencing autoboxing.
-5. **Conceptual:** Explain why a lambda capturing a local variable that's later reassigned fails to compile, tracing the explanation back to Module 02's Stack model.
-6. **Synthesis:** Design a small validation pipeline using `Predicate<String>.and(...)`/`.or(...)`/`.negate()` combining three named predicates (non-blank, minimum length, no whitespace), and apply it to filter a `List<String>`.
-
 ## What's Next
 
 Module 17 gave you the complete functional programming toolkit — lambdas, method references, and the standard functional interface library. **Module 18 — Streams** now puts every piece of this module to direct, constant use: the Stream API's `map`/`filter`/`reduce`/`collect` pipeline, parallel streams, and the `Collectors` utility class — the modern, idiomatic way to process collections in Java, replacing much of the explicit loop-writing you've done since Module 04.
-
----
-
-**Previous:** [05 — `Optional`](05-optional.md) · **Module Overview:** [00 — Module Overview](00-module-overview.md)
-
-**Type "Continue" to begin Module 18 — Streams.**

@@ -118,13 +118,3 @@ Think of a lambda like **writing out full, explicit instructions**: "take this i
 
 - A **method reference** (`ClassOrObject::methodName`) is concise syntax for a lambda whose entire body is a pure pass-through to an existing method or constructor — four forms: static, bound instance, unbound instance (arbitrary receiver), and constructor.
 - Prefer method references over an equivalent pure-pass-through lambda for their conciseness and immediately recognizable intent; lambdas remain necessary for any logic beyond a direct pass-through.
-
-## Exercises
-
-1. Rewrite `s -> s.toUpperCase()` as a method reference, and identify which of the four kinds it is.
-2. Rewrite `() -> new HashMap<String, Integer>()` as a method reference.
-3. Explain why `n -> n > 0` (a `Predicate<Integer>`) cannot be rewritten as a method reference.
-
----
-
-**Previous:** [02 — Lambda Expressions](02-lambda-expressions.md) · **Next:** [04 — Built-In Functional Interfaces](04-built-in-functional-interfaces.md)

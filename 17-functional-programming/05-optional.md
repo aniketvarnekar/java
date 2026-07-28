@@ -163,12 +163,6 @@ Think of `Optional<T>` like a **clearly labeled "may be empty" gift box**, as op
 - The idiomatic style is functional chaining (`map`/`filter`/`ifPresent`/`orElse`/`orElseThrow`), built directly on Topic 4's `Function`/`Predicate`/`Consumer` — not `isPresent()` + `.get()`.
 - Real anti-patterns: calling `.get()` without checking, using `Optional` as a field/parameter type, and wrapping collections in `Optional` instead of returning them empty.
 
-## Exercises
-
-1. Rewrite `findUserById`'s pre-`Optional` version (returning a possibly-`null` `User`) to return `Optional<User>` instead, and rewrite the calling code using `.map(...).orElse(...)`.
-2. Explain precisely why calling `.get()` on an `Optional` without checking `isPresent()` first defeats the purpose of using `Optional` at all.
-3. Explain why a `User` class should generally not have an `Optional<String> middleName` field, and describe the preferred alternative.
-
 ## Module-Wide Quick Revision
 
 - A functional interface has exactly one abstract method; `@FunctionalInterface` enforces this; this concept is the prerequisite that makes lambdas type-safe (Topic 1).
@@ -184,17 +178,3 @@ Think of `Optional<T>` like a **clearly labeled "may be empty" gift box**, as op
 - Confusing `andThen`'s order with `compose`'s reversed order.
 - Using `Optional.get()` without checking presence first.
 - Using `Optional` as a field type or method parameter.
-
-## Mini Quiz (Module-Wide)
-
-1. What makes an interface "functional"?
-2. Why must local variables captured by a lambda be effectively final?
-3. What are the four kinds of method references?
-4. Why do primitive-specialized functional interfaces (like `IntPredicate`) exist?
-5. Why is `Optional` intended as a return type, not a field type?
-
-*(Answers are derivable from Topics 1, 2, 3, 4, and this topic, respectively.)*
-
----
-
-**Previous:** [04 — Built-In Functional Interfaces](04-built-in-functional-interfaces.md) · **Next:** [06 — Module Summary, Interview Questions & Exercises](06-module-summary-exercises.md)
