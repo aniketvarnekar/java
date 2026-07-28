@@ -84,19 +84,23 @@ Recall Module 07, Topic 3: `hashCode()` must be derived from the same fields as 
 `String`'s internal character data is stored in a `private final` array (historically `char[]`; since Java 9, often a more compact `byte[]` with an encoding flag — a real, JDK-internal optimization called "Compact Strings," beyond this course's Core Java scope to implement yourself, but worth knowing exists), and **no public method ever exposes a way to modify that array's contents**. Every apparent "mutation" method (`substring`, `concat`, `replace`, etc.) internally constructs and returns an **entirely new** `String` object with its own new internal array, rather than touching the original's data at all.
 
 ```
- String s = "Hello";           s.toUpperCase() returns a NEW String object:
+String s = "Hello";              s.toUpperCase() returns a NEW String object:
 
- ┌───────────────┐            ┌───────────────┐
- │  "Hello" object  │            │  "HELLO" object  │  <- a DIFFERENT, NEW object
- │  chars: H,e,l,l,o  │            │  chars: H,E,L,L,O  │
- │  (private final,    │            │  (private final,    │
- │   never exposed      │            │   never exposed      │
- │   for mutation)       │            │   for mutation)       │
- └───────────────┘            └───────────────┘
-        ▲                              ▲
-        │                              │
-        s  (unaffected)            (only reachable if you
-                                       captured the return value)
+┌────────────────────────────┐        ┌────────────────────────────┐
+│ "Hello"                    │        │ "HELLO"                    │
+│                            │        │                            │
+│ chars: H, e, l, l, o       │        │ chars: H, E, L, L, O       │
+│                            │        │                            │
+│ (private final characters; │        │ (private final characters; │
+│  immutable)                │        │  immutable)                │
+└────────────────────────────┘        └────────────────────────────┘
+             ▲                                      ▲
+             │                                      │
+             │                                      └── Only reachable if the
+             │                                          returned value is stored
+             │
+             └── s (still points to "Hello";
+                 remains unchanged)
 ```
 
 ## Real-World Analogy
@@ -144,13 +148,3 @@ Think of an immutable `String` like a **printed photograph**. You cannot edit th
 - Immutability enables four concrete benefits: security (no post-validation mutation attacks), safe multi-threaded sharing with zero synchronization, safe pooling/caching (String Constant Pool, Topic 2), and a cacheable, precomputed `hashCode()`.
 - `final` (variable reassignment lock) and immutability (content-level guarantee) are distinct, independent concepts — don't conflate them.
 - The cost of immutability is that repeated "modifications" create many discarded intermediate objects — directly motivating `StringBuilder` (Topic 4) for building strings incrementally.
-
-## Exercises
-
-1. Predict the output of this code, and explain why: `String s = "java"; s.concat(" rocks"); System.out.println(s);`
-2. Explain, in your own words, the security risk that would exist if `String` were mutable, using the file-path validation scenario from this topic.
-3. Explain precisely why `final String s = "Hello";` is not what makes `String`'s content immutable, distinguishing `final` from immutability clearly.
-
----
-
-**Previous:** [00 — Module Overview](00-module-overview.md) · **Next:** [02 — The String Constant Pool](02-string-constant-pool.md)

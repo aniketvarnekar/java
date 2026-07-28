@@ -30,15 +30,19 @@ System.out.println(s1 == s2);   // true !! -- BOTH variables point to the SAME p
 ```
 
 ```
-              String Constant Pool (part of the Heap, since Java 7)
-              ┌───────────────────────┐
-              │     "hello"  (ONE object)  │◀────────┐
-              └───────────────────────┘         │
-                                                     │
-    s1 ──────────────────────────────────────────┘
-    s2 ──────────────────────────────────────────┘
+                 String Constant Pool (Part of the Heap since Java 7)
 
-    BOTH s1 and s2 point to the EXACT SAME pooled "hello" object
+                 ┌────────────────────────────────┐
+                 │ "hello" (ONE shared object)    │◀──────────┐
+                 └────────────────────────────────┘           │
+                               ▲                              │
+                               │                              │
+               s1 ─────────────┘                              │
+                                                              │
+               s2 ────────────────────────────────────────────┘
+
+
+        BOTH s1 and s2 point to the EXACT SAME pooled "hello" object.
 ```
 
 **Why is this exactly analogous to Module 03, Topic 6's `Integer` cache?** Both are the **exact same underlying optimization idea**: since the objects involved are **immutable** (Topic 1; and Module 03's wrapper classes are also immutable, for the same reasons), it's provably safe to silently share a single instance across many references — and the JVM/JDK exploits this safety specifically for extremely commonly-created values (small integers; string literals) to save memory. If you understood the `Integer` cache, you already understand the *conceptual* core of this topic — only the mechanism's specifics differ.
@@ -54,13 +58,16 @@ System.out.println(s1.equals(s2));      // true -- SAME logical content
 ```
 
 ```
-  String Constant Pool                        Regular Heap (NOT pooled)
-  ┌───────────────────────┐               ┌───────────────────────┐
-  │     "hello"  (pooled)      │               │   "hello" (a SEPARATE,   │
-  └───────────────────────┘               │    genuinely NEW object)  │
-             ▲                                └───────────────────────┘
-             │                                             ▲
-             s1                                              s2
+      String Constant Pool                         Regular Heap (Not Pooled)
+
+┌────────────────────────────────┐        ┌────────────────────────────────┐
+│ "hello" (pooled)               │        │ "hello"                        │
+│                                │        │ (A SEPARATE, genuinely         │
+│                                │        │  NEW object)                   │
+└────────────────────────────────┘        └────────────────────────────────┘
+                ▲                                           ▲
+                │                                           │
+               s1                                          s2
 ```
 
 **`new String("hello")` deliberately, explicitly asks for a genuinely new, separate object** — bypassing the automatic pooling that plain literal syntax gets. This is precisely, mechanically why `s1 == s2` is `false` here, while `s1.equals(s2)` is correctly `true` (same logical content, different objects — exactly Module 07, Topic 3's `equals()`-vs-identity distinction, applied concretely).
@@ -160,13 +167,3 @@ Think of the String Constant Pool like a **library's single reference copy of a 
 - Literal syntax (and compile-time-constant concatenation) uses the pool automatically; `new String(...)` and runtime concatenation do not.
 - `intern()` manually requests pooling for a runtime-constructed String.
 - **Always use `.equals()`, never `==`, for String content comparison** — this is an absolute rule, not a situational judgment call.
-
-## Exercises
-
-1. Predict the `==` result for each of these pairs, and explain your reasoning for each: (a) `"abc" == "abc"`, (b) `new String("abc") == "abc"`, (c) `("a" + "b" + "c") == "abc"`, (d) `(someVariable + "c") == "abc"` where `someVariable = "ab"`.
-2. Explain, precisely, why comparing Strings with `==` might "pass" during a developer's local testing but fail once real user input is involved.
-3. Write a short program demonstrating `intern()` making a `new String(...)`-created object become `==`-equal to an existing pooled literal.
-
----
-
-**Previous:** [01 — String Immutability](01-string-immutability.md) · **Next:** [03 — String Methods & API](03-string-methods-and-api.md)

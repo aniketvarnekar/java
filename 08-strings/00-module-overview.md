@@ -11,7 +11,7 @@
 3. **[String Methods & API](03-string-methods-and-api.md)** — a comprehensive, practical tour of the `String` class's most-used methods.
 4. **[StringBuilder & StringBuffer](04-stringbuilder-and-stringbuffer.md)** — the mutable alternative to `String`, why it exists, and `StringBuilder` vs. `StringBuffer` vs. `String` in full comparison.
 5. **[String Formatting & Text Blocks](05-string-formatting-and-text-blocks.md)** — `String.format`/`printf`, and a full return to text blocks (previewed in Module 03).
-6. **[Module Summary, Interview Questions & Exercises](06-module-summary-exercises.md)** — consolidated recap, quiz, and practice problems.
+6. **[Module Summary](06-module-summary.md)** — consolidated recap.
 
 ## Prerequisites
 
@@ -22,7 +22,3 @@
 ## How to Study This Module
 
 Topic 2 is the heart of this module — it directly extends the `Integer` cache lesson from Module 03, Topic 6 into an even more commonly encountered form. If you understood *why* `Integer a = 200; Integer b = 200; a == b` is `false`, Topic 2 will feel like a natural, expected extension rather than a new, arbitrary rule.
-
----
-
-**Previous module:** [07 — Objects](../07-objects/00-module-overview.md) · **Next:** [01 — String Immutability](01-string-immutability.md)
