@@ -14,7 +14,7 @@ You now know *what* Java is and *how the JVM* runs it. This module starts actual
 6. **[Wrapper Classes & Autoboxing](06-wrapper-classes-and-autoboxing.md)** — why every primitive has an object wrapper, automatic boxing/unboxing, and the infamous `Integer` caching pitfall.
 7. **[Constants & `final`](07-constants-and-final.md)** — declaring unchangeable data, compile-time constants, and naming conventions.
 8. **[Comments & Code Style](08-comments-and-code-style.md)** — comment types, Javadoc basics, and Java's naming conventions consolidated in one place.
-9. **[Module Summary, Interview Questions & Exercises](09-module-summary-exercises.md)** — consolidated recap, quiz, and practice problems.
+9. **[Module Summary](09-module-summary.md)** — consolidated recap.
 
 ## Prerequisites
 
@@ -24,7 +24,3 @@ You now know *what* Java is and *how the JVM* runs it. This module starts actual
 ## How to Study This Module
 
 Topics 1–3 are foundational vocabulary — read them in order. Topic 4 (Type Conversion) is where most beginner bugs and a disproportionate share of interview questions come from — don't rush it. Topic 6 (Wrapper Classes) revisits the Stack/Heap model from Module 02 in a very concrete, commonly-tested way (`==` vs `.equals()` on boxed values) — this sets up Module 08 (Strings), which has the exact same pitfall in an even more common form.
-
----
-
-**Previous module:** [02 — JVM](../02-jvm/00-module-overview.md) · **Next:** [01 — Variables & Identifiers](01-variables-and-identifiers.md)
