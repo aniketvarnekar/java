@@ -11,7 +11,7 @@ Every program you've written so far in this course has executed **top to bottom,
 3. **[While & Do-While Loops](03-while-and-do-while-loops.md)** — condition-first vs. condition-last repetition, and when each is the right tool.
 4. **[For Loops](04-for-loops.md)** — the classic three-part `for` loop mechanics, plus a first look at the enhanced for-each loop (full depth once you reach Arrays/Collections in Modules 09–10).
 5. **[Break, Continue & Labeled Statements](05-break-continue-and-labeled-statements.md)** — early loop exit, skipping an iteration, and controlling nested loops precisely with labels.
-6. **[Module Summary, Interview Questions & Exercises](06-module-summary-exercises.md)** — consolidated recap, quiz, and practice problems.
+6. **[Module Summary](06-module-summary.md)** — consolidated recap.
 
 ## Prerequisites
 
@@ -20,7 +20,3 @@ Every program you've written so far in this course has executed **top to bottom,
 ## How to Study This Module
 
 This module is shorter and more mechanical than Modules 01–03 — the concepts themselves are intuitive if you've programmed before in any language. The value here is in Java's *specific* syntax and *specific* gotchas (fall-through in classic `switch`, the dangling-else trap, labeled break/continue) — read for precision, not just familiarity. Everything here is used constantly, starting immediately in Module 05 (OOP).
-
----
-
-**Previous module:** [03 — Java Basics](../03-java-basics/00-module-overview.md) · **Next:** [01 — If-Else & Conditional Logic](01-if-else-and-conditional-logic.md)
