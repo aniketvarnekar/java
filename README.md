@@ -65,37 +65,37 @@ This keeps each module focused, complete, and reviewable before moving on — ra
 
 | # | Module | Status | What you'll learn |
 |---|---|---|---|
-| 01 | [Introduction](01-Introduction/) | ✅ Complete | What Java is, why it was created, how it fundamentally works |
-| 02 | [JVM](02-JVM/) | ✅ Complete | JVM architecture, class loading, execution engine |
-| 03 | [Java Basics](03-Java-Basics/) | ✅ Complete | Variables, data types, operators, type conversion |
-| 04 | [Control Flow](04-Control-Flow/) | ✅ Complete | if/else, loops, switch, branching |
-| 05 | [OOP](05-OOP/) | ✅ Complete | Classes, objects, the four pillars of OOP |
-| 06 | [Classes](06-Classes/) | ✅ Complete | Constructors, static, this, initialization blocks |
-| 07 | [Objects](07-Objects/) | ✅ Complete | Object lifecycle, equals/hashCode, Object class |
-| 08 | [Strings](08-Strings/) | ✅ Complete | String pool, immutability, StringBuilder |
-| 09 | [Arrays](09-Arrays/) | ✅ Complete | Array internals, multidimensional arrays |
-| 10 | [Collections](10-Collections/) | ✅ Complete | List, Set, Map, Queue and their implementations |
-| 11 | [Generics](11-Generics/) | ✅ Complete | Type erasure, bounded types, wildcards |
-| 12 | [Exceptions](12-Exceptions/) | ✅ Complete | Checked vs unchecked, try-with-resources |
-| 13 | [IO](13-IO/) | ✅ Complete | Streams, readers/writers, file handling |
-| 14 | [NIO](14-NIO/) | ✅ Complete | Channels, buffers, non-blocking IO |
-| 15 | [Concurrency](15-Concurrency/) | ✅ Complete | Threads, synchronization, executors, virtual threads |
-| 16 | [JVM Internals](16-JVM-Internals/) | ✅ Complete | Bytecode, GC algorithms, JMM |
-| 17 | [Functional Programming](17-Functional-Programming/) | ✅ Complete | Lambdas, functional interfaces, method references |
-| 18 | [Streams](18-Streams/) | ✅ Complete | Stream API, collectors, parallel streams |
-| 19 | [Networking](19-Networking/) | ✅ Complete | Sockets, HTTP client |
-| 20 | [JDBC](20-JDBC/) | ✅ Complete | Database connectivity |
-| 21 | [Modules](21-Modules/) | ✅ Complete | Java Platform Module System (JPMS) |
-| 22 | [Performance](22-Performance/) | ✅ Complete | JVM tuning, profiling, optimization |
-| 23 | [Modern Java](23-Modern-Java/) | ✅ Complete | Records, sealed classes, pattern matching, through Java 25 |
-| 24 | [Interview Preparation](24-Interview-Preparation/) | ✅ Complete | Consolidated interview questions and mock scenarios |
+| 01 | [Introduction](01-introduction/) | ✅ Complete | What Java is, why it was created, how it fundamentally works |
+| 02 | [JVM](02-jvm/) | ✅ Complete | JVM architecture, class loading, execution engine |
+| 03 | [Java Basics](03-java-basics/) | ✅ Complete | Variables, data types, operators, type conversion |
+| 04 | [Control Flow](04-control-flow/) | ✅ Complete | if/else, loops, switch, branching |
+| 05 | [OOP](05-oop/) | ✅ Complete | Classes, objects, the four pillars of OOP |
+| 06 | [Classes](06-classes/) | ✅ Complete | Constructors, static, this, initialization blocks |
+| 07 | [Objects](07-objects/) | ✅ Complete | Object lifecycle, equals/hashCode, Object class |
+| 08 | [Strings](08-strings/) | ✅ Complete | String pool, immutability, StringBuilder |
+| 09 | [Arrays](09-arrays/) | ✅ Complete | Array internals, multidimensional arrays |
+| 10 | [Collections](10-collections/) | ✅ Complete | List, Set, Map, Queue and their implementations |
+| 11 | [Generics](11-generics/) | ✅ Complete | Type erasure, bounded types, wildcards |
+| 12 | [Exceptions](12-exceptions/) | ✅ Complete | Checked vs unchecked, try-with-resources |
+| 13 | [IO](13-io/) | ✅ Complete | Streams, readers/writers, file handling |
+| 14 | [NIO](14-nio/) | ✅ Complete | Channels, buffers, non-blocking IO |
+| 15 | [Concurrency](15-concurrency/) | ✅ Complete | Threads, synchronization, executors, virtual threads |
+| 16 | [JVM Internals](16-jvm-internals/) | ✅ Complete | Bytecode, GC algorithms, JMM |
+| 17 | [Functional Programming](17-functional-programming/) | ✅ Complete | Lambdas, functional interfaces, method references |
+| 18 | [Streams](18-streams/) | ✅ Complete | Stream API, collectors, parallel streams |
+| 19 | [Networking](19-networking/) | ✅ Complete | Sockets, HTTP client |
+| 20 | [JDBC](20-jdbc/) | ✅ Complete | Database connectivity |
+| 21 | [Modules](21-modules/) | ✅ Complete | Java Platform Module System (JPMS) |
+| 22 | [Performance](22-performance/) | ✅ Complete | JVM tuning, profiling, optimization |
+| 23 | [Modern Java](23-modern-java/) | ✅ Complete | Records, sealed classes, pattern matching, through Java 25 |
+| 24 | [Interview Preparation](24-interview-preparation/) | ✅ Complete | Consolidated interview questions and mock scenarios |
 
 ## Companion References (grow with every module)
 
-- **[Glossary.md](Glossary.md)** — every technical term defined the moment it's introduced
-- **[Interview-Questions.md](Interview-Questions.md)** — consolidated interview Q&A across all modules
-- **[Cheat-Sheet.md](Cheat-Sheet.md)** — quick-reference syntax and comparisons
-- **[Exercises.md](Exercises.md)** — consolidated practice problems across all modules
+- **[Glossary.md](glossary.md)** — every technical term defined the moment it's introduced
+- **[Interview-Questions.md](interview-questions.md)** — consolidated interview Q&A across all modules
+- **[Cheat-Sheet.md](cheat-sheet.md)** — quick-reference syntax and comparisons
+- **[Exercises.md](exercises.md)** — consolidated practice problems across all modules
 
 ## How to read this course
 
