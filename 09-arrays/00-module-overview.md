@@ -10,7 +10,7 @@ You've used arrays informally since Module 01's `String[] args`. This module mak
 2. **[Multidimensional Arrays](02-multidimensional-arrays.md)** — 2D arrays as "arrays of arrays," and jagged (non-rectangular) arrays.
 3. **[The `Arrays` Utility Class](03-arrays-utility-class.md)** — `sort`, `binarySearch`, `fill`, `equals`, `toString`, `copyOf`, and more.
 4. **[Array vs. `ArrayList`](04-array-vs-arraylist.md)** — the complete comparison, and why Java provides both.
-5. **[Module Summary, Interview Questions & Exercises](05-module-summary-exercises.md)** — consolidated recap, quiz, and practice problems.
+5. **[Module Summary](05-module-summary.md)** — consolidated recap.
 
 ## Prerequisites
 
@@ -21,7 +21,3 @@ You've used arrays informally since Module 01's `String[] args`. This module mak
 ## How to Study This Module
 
 This is a comparatively compact module — arrays are conceptually simple once you know "an array is an object on the Heap holding a fixed-size, contiguous sequence of same-typed slots." Topic 1 establishes that model precisely; Topics 2–3 build on it; Topic 4 is the module's most important takeaway, since it directly motivates why Module 10 (Collections) exists at all.
-
----
-
-**Previous module:** [08 — Strings](../08-strings/00-module-overview.md) · **Next:** [01 — Array Fundamentals](01-array-fundamentals.md)

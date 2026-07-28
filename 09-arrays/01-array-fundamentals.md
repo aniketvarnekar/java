@@ -51,12 +51,19 @@ scores[1] = 85;
 ```
 
 ```
- STACK (Module 02, Topic 3)              HEAP (Module 02, Topic 3)
- ┌─────────────────────┐              ┌────────────────────────────┐
- │ scores = 0xA1B2  ────────┼─────────────▶│  int[5] array OBJECT           │
- │  (a REFERENCE)             │              │  length = 5   (see below)       │
- └─────────────────────┘              │  [0]=90 [1]=85 [2]=0 [3]=0 [4]=0│
-                                          └────────────────────────────┘
+      STACK (Module 02, Topic 3)                  HEAP (Module 02, Topic 3)
+
+┌────────────────────────────┐          ┌──────────────────────────────────┐
+│ scores = 0xA1B2 ───────────┼─────────▶│ int[5] Array Object              │
+│ (a reference)              │          │                                  │
+└────────────────────────────┘          │ length = 5                       │
+                                        │                                  │
+                                        │ [0] = 90                         │
+                                        │ [1] = 85                         │
+                                        │ [2] = 0                          │
+                                        │ [3] = 0                          │
+                                        │ [4] = 0                          │
+                                        └──────────────────────────────────┘
 ```
 
 **This is exactly Module 06, Topic 1's reference model, applied to arrays**: `scores` on the Stack holds a reference (address); the actual array data — every one of its 5 slots, stored **contiguously** in memory — lives on the Heap as a single object. Passing an array to a method follows the **exact same** pass-by-value-of-the-reference rules from Module 06, Topic 1: a method can mutate the array's contents (visible to the caller, since both share the reference), but reassigning the local parameter to a different array has no effect on the caller.
@@ -159,14 +166,3 @@ Think of an array like a **row of numbered mailboxes, permanently bolted to a wa
 - Array length is **permanently fixed** at creation and exposed via the `.length` **field** (not a method).
 - Elements are automatically defaulted (`0`/`false`/`null`, matching Module 03's field-defaulting rules) upon creation.
 - Every array access is **runtime bounds-checked**, throwing `ArrayIndexOutOfBoundsException` for invalid indices — a genuine safety guarantee, not just a convenience.
-
-## Exercises
-
-1. Declare and initialize an `int[]` of 5 exam scores using array literal syntax, then write a loop printing each score with its index.
-2. Explain, precisely, why `new Person[3]` does not create three usable `Person` objects, and write the code needed to fully populate it.
-3. Draw the Stack/Heap memory diagram (in the style used in this topic) for `double[] prices = new double[3];` after assigning `prices[0] = 9.99;`.
-4. Predict and explain the exact exception (if any) thrown by each of: `int[] a = new int[3]; a[3] = 1;` and `int[] b = new int[0]; b[0] = 1;`.
-
----
-
-**Previous:** [00 — Module Overview](00-module-overview.md) · **Next:** [02 — Multidimensional Arrays](02-multidimensional-arrays.md)

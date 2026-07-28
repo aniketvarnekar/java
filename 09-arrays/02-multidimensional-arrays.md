@@ -23,15 +23,34 @@ int[][] grid = new int[3][4];   // 3 rows, 4 columns
 **What this actually creates**, precisely: an array of length 3, where **each element is itself a separate `int[]` array of length 4**:
 
 ```
- grid (outer array, length 3)
- ┌──────────────────────────┐
- │ grid[0] ──▶ [int[4]: 0,0,0,0]  │
- │ grid[1] ──▶ [int[4]: 0,0,0,0]  │
- │ grid[2] ──▶ [int[4]: 0,0,0,0]  │
- └──────────────────────────┘
+                    grid (Outer Array, length = 3)
 
- Each grid[i] is its OWN, INDEPENDENT array object on the Heap --
- "grid" is really just an array of REFERENCES to other arrays (Module 06, Topic 1's reference model)
+┌────────────────────────────────────────────┐
+│ grid[0] ───────────────┐                   │
+│ grid[1] ────────────┐  │                   │
+│ grid[2] ─────────┐  │  │                   │
+└──────────────────┼──┼──┼───────────────────┘
+                   │  │  │
+                   ▼  ▼  ▼
+        ┌──────────────────┐
+        │ int[4]           │
+        │ [0, 0, 0, 0]     │
+        └──────────────────┘
+
+        ┌──────────────────┐
+        │ int[4]           │
+        │ [0, 0, 0, 0]     │
+        └──────────────────┘
+
+        ┌──────────────────┐
+        │ int[4]           │
+        │ [0, 0, 0, 0]     │
+        └──────────────────┘
+
+Each grid[i] is its OWN, INDEPENDENT array object on the Heap.
+
+"grid" is an array of REFERENCES to other arrays
+(Module 06, Topic 1's reference model).
 ```
 
 ```java
@@ -95,15 +114,37 @@ jagged[2] = new int[]{1, 2};                  // row 2 has 2 elements
 ```
 
 ```
- jagged
- ┌──────────────────────┐
- │ jagged[0] ──▶ [1]            │
- │ jagged[1] ──▶ [1, 2, 3]        │
- │ jagged[2] ──▶ [1, 2]             │
- └──────────────────────┘
+                     jagged (Outer Array)
 
-  A genuinely NON-rectangular, "jagged" (staircase-shaped) structure --
-  impossible to represent in languages with a truly native, fixed-shape 2D array type
+┌──────────────────────────────────────────┐
+│ jagged[0] ───────────────┐               │
+│ jagged[1] ────────────┐  │               │
+│ jagged[2] ─────────┐  │  │               │
+└────────────────────┼──┼──┼───────────────┘
+                     │  │  │
+                     ▼  ▼  ▼
+            ┌──────────────┐
+            │ int[1]       │
+            │ [1]          │
+            └──────────────┘
+
+            ┌──────────────┐
+            │ int[3]       │
+            │ [1, 2, 3]    │
+            └──────────────┘
+
+            ┌──────────────┐
+            │ int[2]       │
+            │ [1, 2]       │
+            └──────────────┘
+
+Each jagged[i] points to an INDEPENDENT array object.
+
+Rows can have DIFFERENT lengths, producing a
+non-rectangular ("jagged") structure.
+
+This is possible because Java multi-dimensional arrays
+are actually arrays of references to other arrays.
 ```
 
 **Why does this matter, practically?** Real-world data is frequently naturally jagged — a triangular number pattern, a list of students each with a different number of grades, a sparse matrix representation. Because Java's "2D array" is fundamentally just "array of array references" (Module 06, Topic 1's reference model, once again), this flexibility comes entirely for free, with no special syntax needed beyond what you already know from ordinary array creation.
@@ -171,13 +212,3 @@ Think of a rectangular 2D array like a **fixed-size apartment building where eve
 - This design enables **jagged arrays** (rows of different lengths) with zero special syntax.
 - Correct traversal always uses `array[row].length` for the inner bound, never a fixed/hardcoded value, to correctly handle both rectangular and jagged cases.
 - The same "array of arrays" principle extends to three or more dimensions, though this is rare in typical application code.
-
-## Exercises
-
-1. Create a jagged `int[][]` representing a triangular number pattern (row `i` has `i + 1` elements, e.g., row 0 has 1 element, row 1 has 2, etc., for 5 rows), and print it using correctly-bounded nested loops.
-2. Explain precisely why `grid[row].length` (not `grid[0].length` or `grid.length`) must be used for the inner loop bound in general multidimensional array traversal code.
-3. Draw the memory diagram (in this topic's style) for `int[][] grid = {{1, 2}, {3, 4, 5}};`, showing the outer array and each independent inner array object.
-
----
-
-**Previous:** [01 — Array Fundamentals](01-array-fundamentals.md) · **Next:** [03 — The `Arrays` Utility Class](03-arrays-utility-class.md)
