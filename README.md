@@ -93,7 +93,6 @@ This keeps each module focused, complete, and reviewable before moving on — ra
 ## Companion References (grow with every module)
 
 - **[Interview-Questions.md](interview-questions.md)** — consolidated interview Q&A across all modules
-- **[Cheat-Sheet.md](cheat-sheet.md)** — quick-reference syntax and comparisons
 
 ## How to read this course
 
