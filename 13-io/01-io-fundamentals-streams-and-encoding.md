@@ -23,21 +23,24 @@ Nearly every I/O bug that isn't a simple "file not found" turns out to be an enc
 ## Two Parallel Hierarchies — Byte Streams and Character Streams
 
 ```
-                    BYTE STREAMS                      CHARACTER STREAMS
-                (raw 8-bit data)                    (Unicode TEXT, char-based)
+                           BYTE STREAMS                             CHARACTER STREAMS
+                         (raw 8-bit data)                     (Unicode TEXT, char-based)
 
-              InputStream (abstract)                  Reader (abstract)
-                     │                                      │
-        ┌────────────┼────────────┐            ┌────────────┼────────────┐
-        ▼             ▼            ▼            ▼             ▼            ▼
- FileInputStream  BufferedInputStream  ...  FileReader  BufferedReader  InputStreamReader
+                    InputStream (abstract)                     Reader (abstract)
+                             │                                         │
+          ┌──────────────────┼──────────────────┐      ┌───────────────┼────────────────┐
+          │                  │                  │      │               │                │
+          ▼                  ▼                  ▼      ▼               ▼                ▼
+ FileInputStream   BufferedInputStream        ...  FileReader   BufferedReader   InputStreamReader
                                                                         (the BRIDGE, Topic 4)
 
-              OutputStream (abstract)                 Writer (abstract)
-                     │                                      │
-        ┌────────────┼────────────┐            ┌────────────┼────────────┐
-        ▼             ▼            ▼            ▼             ▼            ▼
- FileOutputStream  BufferedOutputStream  ...  FileWriter  BufferedWriter  OutputStreamWriter
+
+                   OutputStream (abstract)                    Writer (abstract)
+                             │                                         │
+          ┌──────────────────┼──────────────────┐      ┌───────────────┼────────────────┐
+          │                  │                  │      │               │                │
+          ▼                  ▼                  ▼      ▼               ▼                ▼
+ FileOutputStream  BufferedOutputStream       ...  FileWriter   BufferedWriter   OutputStreamWriter
 ```
 
 **Why does Java maintain two entirely separate class hierarchies, rather than one unified stream type?** This is the central question this topic answers precisely.
@@ -140,13 +143,3 @@ Think of byte streams like shipping a **sealed box of unspecified physical objec
 - Java maintains two parallel hierarchies: **byte streams** (`InputStream`/`OutputStream`, raw bytes, no encoding concept) for binary data, and **character streams** (`Reader`/`Writer`, encoding-aware) for text.
 - **Character encoding** (UTF-8, UTF-16, etc.) maps between bytes and characters — mismatched read/write encodings cause "mojibake" garbled text.
 - Always specify encoding explicitly (prefer UTF-8) rather than relying on platform defaults, for portable, predictable behavior.
-
-## Exercises
-
-1. Explain, in your own words, why `InputStream` and `Reader` are separate class hierarchies rather than one unified stream type.
-2. Explain precisely how the same underlying text data, written in UTF-8 but read assuming ISO-8859-1, could produce garbled output despite no bytes being lost or corrupted.
-3. Rewrite `new FileReader("notes.txt")` to explicitly specify UTF-8 encoding, and explain why this is considered best practice over the implicit, platform-default version.
-
----
-
-**Previous:** [00 — Module Overview](00-module-overview.md) · **Next:** [02 — File & Path Handling](02-file-and-path-handling.md)

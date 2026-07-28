@@ -11,7 +11,7 @@ Every real program eventually needs to read from or write to something outside i
 3. **[Byte Streams & Buffering](03-byte-streams-and-buffering.md)** — `FileInputStream`/`FileOutputStream`, and why unbuffered I/O is a real, measurable performance trap.
 4. **[Character Streams, Readers & Writers](04-character-streams-readers-and-writers.md)** — `FileReader`/`FileWriter`, `BufferedReader`/`BufferedWriter`, and the bridge classes connecting bytes to characters.
 5. **[Object Serialization](05-object-serialization.md)** — `Serializable`, `transient`, `serialVersionUID`, and the well-known, real problems with Java's built-in serialization.
-6. **[Module Summary, Interview Questions & Exercises](06-module-summary-exercises.md)** — consolidated recap, quiz, and practice problems.
+6. **[Module Summary](06-module-summary.md)** — consolidated recap.
 
 ## Prerequisites
 
@@ -22,7 +22,3 @@ Every real program eventually needs to read from or write to something outside i
 ## How to Study This Module
 
 Topic 1 is the conceptual foundation the rest of the module builds on — understanding *why* bytes and characters need separate class hierarchies (not just "Java has two APIs, memorize both") makes Topics 3–4 feel like natural applications rather than parallel, redundant systems to learn independently.
-
----
-
-**Previous module:** [12 — Exceptions](../12-exceptions/00-module-overview.md) · **Next:** [01 — IO Fundamentals, Streams & Encoding](01-io-fundamentals-streams-and-encoding.md)
