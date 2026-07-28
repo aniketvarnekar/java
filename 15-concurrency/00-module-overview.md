@@ -14,7 +14,7 @@ This module has been previewed constantly throughout the course — `Vector`/`Ha
 6. **[`CompletableFuture` & Async Programming](06-completablefuture-and-async-programming.md)** — composing asynchronous work.
 7. **[Concurrent Collections](07-concurrent-collections.md)** — `ConcurrentHashMap` in full depth, `CopyOnWriteArrayList`, `BlockingQueue`.
 8. **[Virtual Threads & Structured Concurrency](08-virtual-threads-and-structured-concurrency.md)** — Java 21's landmark concurrency model, delivering fully on Module 14's preview.
-9. **[Module Summary, Interview Questions & Exercises](09-module-summary-exercises.md)** — consolidated recap, quiz, and practice problems.
+9. **[Module Summary](09-module-summary.md)** — consolidated recap.
 
 ## Prerequisites
 
@@ -26,7 +26,3 @@ This module has been previewed constantly throughout the course — `Vector`/`Ha
 ## How to Study This Module
 
 Topic 2 is the conceptual core of this entire module — until you understand *why* naive concurrent code breaks (not just "use synchronized"), every subsequent tool will feel like arbitrary ceremony. Topics 3–4 give you the classical toolkit; Topics 5–7 give you the practical, everyday tools real applications actually use; Topic 8 is the payoff — modern Java's answer to making concurrent programming dramatically simpler.
-
----
-
-**Previous module:** [14 — NIO](../14-nio/00-module-overview.md) · **Next:** [01 — Threads Fundamentals](01-threads-fundamentals.md)

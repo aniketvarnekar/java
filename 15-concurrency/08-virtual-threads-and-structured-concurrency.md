@@ -40,20 +40,26 @@ try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
 **A Virtual Thread is a lightweight thread managed entirely by the JVM, NOT mapped one-to-one to an OS thread.** Instead, the JVM runs **many** Virtual Threads on top of a much smaller pool of actual OS ("platform") threads — called **"carrier threads"** — automatically and transparently **unmounting** a Virtual Thread from its carrier whenever it blocks (on I/O, `sleep()`, lock acquisition, etc.), freeing that carrier thread to run a **different** Virtual Thread in the meantime, and **remounting** the original Virtual Thread onto a (possibly different) carrier thread once it's ready to resume.
 
 ```
-                  A SMALL POOL OF REAL OS ("CARRIER") THREADS
-                  ┌──────────┐  ┌──────────┐  ┌──────────┐
-                  │ Carrier 1  │  │ Carrier 2  │  │ Carrier 3  │      (maybe just a handful,
-                  └────┬─────┘  └────┬─────┘  └────┬─────┘       often ~ number of CPU cores)
-                       │              │              │
-              ┌────────┴────┐  ┌─────┴──────┐  ┌────┴───────┐
-              ▼             ▼  ▼            ▼  ▼            ▼
-        VirtualThread1  VirtualThread2  VirtualThread3  ... VirtualThread100000
+                    A SMALL POOL OF REAL OS ("CARRIER") THREADS
 
-  When VirtualThread1 BLOCKS (e.g., Thread.sleep, waiting on I/O):
-     -> it's TRANSPARENTLY UNMOUNTED from Carrier 1
-     -> Carrier 1 is now FREE to run a DIFFERENT waiting Virtual Thread
-     -> when VirtualThread1's block condition resolves, it's REMOUNTED
-        onto (possibly a DIFFERENT) available carrier thread, and resumes
+           ┌────────────┐    ┌────────────┐    ┌────────────┐
+           │ Carrier 1  │    │ Carrier 2  │    │ Carrier 3  │
+           └─────┬──────┘    └─────┬──────┘    └─────┬──────┘
+                 │                 │                 │
+                 │                 │                 │
+      (often only a handful, approximately the number of CPU cores)
+                 │                 │                 │
+      ┌──────────┴───────┐ ┌───────┴────────┐ ┌──────┴────────┐
+      ▼                  ▼ ▼                ▼ ▼               ▼
+ VirtualThread1  VirtualThread2  VirtualThread3  ...  VirtualThread100000
+
+
+When VirtualThread1 BLOCKS (e.g., Thread.sleep(), waiting on I/O):
+
+  → It is TRANSPARENTLY UNMOUNTED from Carrier 1.
+  → Carrier 1 is now FREE to run a DIFFERENT waiting Virtual Thread.
+  → When VirtualThread1's blocking condition resolves, it is REMOUNTED
+    onto a (possibly DIFFERENT) available carrier thread and resumes.
 ```
 
 **This is the complete, mechanical answer to the C10K problem, delivered in a genuinely different way than Module 14's raw NIO approach**: instead of you manually writing non-blocking, event-loop-style code (Module 14, Topic 3's `Selector` pattern) to avoid tying up a scarce OS thread while waiting, **the JVM does this transparently for you**, while you write **simple, ordinary, blocking-style code** — exactly Topic 1's straightforward thread-per-task style, now genuinely scalable to hundreds of thousands of concurrent tasks.
@@ -182,18 +188,3 @@ Think of platform threads like **dedicated, full-time employees, each requiring 
 - Forgetting `ExecutorService.shutdown()`.
 - Using `synchronizedMap`/check-then-act instead of `ConcurrentHashMap`'s atomic methods.
 - Assuming Virtual Threads help CPU-bound work.
-
-## Mini Quiz (Module-Wide)
-
-1. Why is `count++` not atomic?
-2. What does `volatile` guarantee, and what does it NOT guarantee?
-3. Why must `wait()` be called in a `while` loop?
-4. What is Compare-And-Swap?
-5. Why does `ConcurrentHashMap` outperform `synchronizedMap`?
-6. How do Virtual Threads achieve massive scalability with simple blocking code?
-
-*(Answers are derivable from Topics 2, 2, 3, 4, 7, and this topic, respectively.)*
-
----
-
-**Previous:** [07 — Concurrent Collections](07-concurrent-collections.md) · **Next:** [09 — Module Summary, Interview Questions & Exercises](09-module-summary-exercises.md)

@@ -45,13 +45,19 @@ executor.shutdown();   // signals: "no more new tasks will be submitted; finish 
 ```
  executor.submit() × 10,000 tasks
 
-           ┌─────────── TASK QUEUE ───────────┐
-           │  task1, task2, task3, ... task10000 │
-           └───────────┬──────────────────────┘
-                          │  worker threads pull tasks as they become free
-        ┌────────┬────────┼────────┬────────┐
-        ▼        ▼          ▼        ▼
-   Thread 1  Thread 2   Thread 3  Thread 4     <- ONLY 4 threads total, REUSED across ALL 10,000 tasks
+
+                  ┌────────────── TASK QUEUE ──────────────┐
+                  │ task1, task2, task3, ... task10000     │
+                  └──────────────────┬─────────────────────┘
+                                     │
+                                     │ Worker threads pull tasks
+                                     │ as they become free
+                                     ▼
+               ┌──────────┬──────────┬──────────┬──────────┐
+               ▼          ▼          ▼          ▼
+          Thread 1   Thread 2   Thread 3   Thread 4
+
+          ONLY 4 threads total, REUSED across ALL 10,000 tasks
 ```
 
 ## Standard Thread Pool Factory Methods
@@ -150,14 +156,3 @@ Think of `new Thread()` per task like **hiring and training a brand-new employee
 - Standard pool types: `newFixedThreadPool` (bounded, predictable), `newCachedThreadPool` (grows as needed, but can grow unboundedly), `newSingleThreadExecutor` (sequential execution), `newScheduledThreadPool` (delayed/repeating tasks).
 - **`Future<T>`** represents a possibly-not-yet-complete asynchronous computation's result; `.get()` blocks until available (optionally with a timeout).
 - Always call `shutdown()` — forgetting it can prevent the JVM from exiting.
-
-## Exercises
-
-1. Rewrite the 10,000-task loop from this topic's opening example using `Executors.newFixedThreadPool(4)`, submitting all tasks and calling `shutdown()` at the end.
-2. Write code submitting a `Callable<Integer>` task to an executor, retrieving its result via `Future.get()` with a 2-second timeout, and handling the `TimeoutException` case.
-3. Explain, referencing Module 14, Topic 3's C10K discussion, why reusing a pool of threads is more scalable than creating one thread per task.
-4. Explain the specific risk of using `newCachedThreadPool` under sustained, very heavy load, and what pool type would be a safer choice instead.
-
----
-
-**Previous:** [04 — Atomic Classes & CAS](04-atomic-classes-and-cas.md) · **Next:** [06 — `CompletableFuture` & Async Programming](06-completablefuture-and-async-programming.md)

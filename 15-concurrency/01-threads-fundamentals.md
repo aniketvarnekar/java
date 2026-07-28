@@ -21,16 +21,18 @@ Every concurrency tool in this module ultimately manages threads underneath. Thi
 > A **thread** is a unit of execution **within** a process — multiple threads in the same process **share** that process's memory (the Heap, Module 02, Topic 3), but each has its **own** private JVM Stack, PC Register, and Native Method Stack.
 
 ```
-                          ONE PROCESS (one JVM instance)
-        ┌───────────────────────────────────────────────────────────┐
-        │        SHARED: Heap, Method Area/Metaspace (Module 02)        │
-        │                                                               │
-        │   Thread A          Thread B          Thread C                │
-        │  ┌─────────┐      ┌─────────┐      ┌─────────┐               │
-        │  │ own Stack  │      │ own Stack  │      │ own Stack  │               │
-        │  │ own PC Reg  │      │ own PC Reg  │      │ own PC Reg  │               │
-        │  └─────────┘      └─────────┘      └─────────┘               │
-        └───────────────────────────────────────────────────────────┘
+                         ONE PROCESS (one JVM instance)
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ SHARED: Heap, Method Area / Metaspace (Module 02)                            │
+│                                                                              │
+│   Thread A               Thread B               Thread C                     │
+│  ┌──────────────┐       ┌──────────────┐       ┌──────────────┐              │
+│  │ own Stack    │       │ own Stack    │       │ own Stack    │              │
+│  │ own PC Reg   │       │ own PC Reg   │       │ own PC Reg   │              │
+│  └──────────────┘       └──────────────┘       └──────────────┘              │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
 ```
 
 **This diagram is exactly Module 02, Topic 3's Runtime Data Areas picture** — that entire "per-thread vs. shared" split was built specifically to support multithreading, and you've had the complete memory-model foundation for this module since Module 02.
@@ -87,15 +89,33 @@ t.start();      // CORRECT -- creates a genuine NEW thread, which THEN calls run
 ## The Thread Lifecycle
 
 ```
-        NEW                 RUNNABLE              BLOCKED/WAITING/         TERMINATED
-   (created, not         (eligible to run,          TIMED_WAITING           (run() has
-    yet started)          OS scheduler decides       (waiting for a lock,    completed, or
-        │                 WHEN it actually runs)      or wait()/join()/       an uncaught
-        │  start()               │                    sleep())                exception
-        ▼                        │                        │                   propagated out)
-   ┌─────────┐           ┌─────────────┐         ┌──────────────┐         ┌─────────┐
-   │   NEW      │──────────▶│  RUNNABLE      │◀───────▶│ BLOCKED/WAITING │────────────▶│TERMINATED │
-   └─────────┘           └─────────────┘         └──────────────┘         └─────────┘
+                             Thread Lifecycle
+
+        NEW                  RUNNABLE               BLOCKED / WAITING /          TERMINATED
+   (created, not         (eligible to run,            TIMED_WAITING             (run() has
+    yet started)          OS scheduler decides       (waiting for a lock,       completed, or
+                           WHEN it actually runs)     or wait()/join()/          an uncaught
+                                                      sleep())                  exception
+                                                                                 propagated out)
+
+          │
+          │ start()
+          ▼
+    ┌────────────┐
+    │    NEW     │
+    └────────────┘
+          │
+          ▼
+    ┌────────────┐      waiting / blocked      ┌────────────────────────┐
+    │ RUNNABLE   │ ◀────────────────────────▶ │ BLOCKED / WAITING /     │
+    └────────────┘                             │ TIMED_WAITING           │
+          │                                   └────────────────────────┘
+          │ run() completes /
+          │ uncaught exception
+          ▼
+    ┌──────────────┐
+    │ TERMINATED   │
+    └──────────────┘
 ```
 
 - **NEW**: a `Thread` object has been created (`new Thread(...)`) but `start()` hasn't been called yet.
@@ -179,13 +199,3 @@ Think of a **process** like an **entire, self-contained restaurant** — its own
 - Threads are created by implementing `Runnable` (preferred, composition-based) or extending `Thread` (consumes single inheritance); always call `start()`, never `run()` directly, for genuine concurrency.
 - The thread lifecycle: `NEW` → `RUNNABLE` ⇄ `BLOCKED`/`WAITING`/`TIMED_WAITING` → `TERMINATED` (final, non-restartable).
 - `join()` blocks the calling thread until another thread terminates; `sleep()` pauses the calling thread for a specified duration.
-
-## Exercises
-
-1. Write two versions of a simple "print numbers 1-5" task: one extending `Thread`, one implementing `Runnable` via a lambda — start both and observe the (likely interleaved, non-deterministic) output.
-2. Predict and explain the difference in behavior between calling `.start()` and calling `.run()` on the same `Thread` object.
-3. Write a program that starts a worker thread doing a short simulated task (`Thread.sleep(...)`), calls `join()`, and prints a message only after `join()` returns — explain why this guarantees the worker has finished.
-
----
-
-**Previous:** [00 — Module Overview](00-module-overview.md) · **Next:** [02 — Race Conditions & the Java Memory Model](02-race-conditions-and-the-java-memory-model.md)
