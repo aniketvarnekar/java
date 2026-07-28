@@ -12,7 +12,7 @@ Module 02 gave you the JVM's architecture; Module 15 gave you the Java Memory Mo
 4. **[Reflection](04-reflection.md)** — inspecting and invoking code at runtime, and why frameworks depend on it.
 5. **[Annotations & Dynamic Proxies](05-annotations-and-dynamic-proxies.md)** — writing custom annotations, and the proxy mechanism that makes Spring's `@Transactional`/`@Autowired`-style "magic" actually work.
 6. **[Method Handles & Modern Internals](06-method-handles-and-modern-internals.md)** — `MethodHandle`, `invokedynamic`, and a brief look at what powers modern Java's performance.
-7. **[Module Summary, Interview Questions & Exercises](07-module-summary-exercises.md)** — consolidated recap, quiz, and practice problems.
+7. **[Module Summary](07-module-summary.md)** — consolidated recap.
 
 ## Prerequisites
 
@@ -23,7 +23,3 @@ Module 02 gave you the JVM's architecture; Module 15 gave you the Java Memory Mo
 ## How to Study This Module
 
 Topics 1–3 deepen concepts you already have a working model of from Modules 02 and 15 — read them as "here's the mechanism behind what you already trust." Topics 4–5 (Reflection, Dynamic Proxies) are the most immediately practically relevant for understanding how real frameworks work — if you've ever wondered "how does Spring know to inject this dependency without me writing the wiring code," this is where that question gets answered.
-
----
-
-**Previous module:** [15 — Concurrency](../15-concurrency/00-module-overview.md) · **Next:** [01 — Bytecode Deep Dive](01-bytecode-deep-dive.md)

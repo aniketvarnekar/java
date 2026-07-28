@@ -1,4 +1,4 @@
-# Module 16 Summary, Interview Questions & Exercises
+# Module 16 Summary
 
 ## Topic Coverage Verification
 
@@ -28,38 +28,6 @@ Every topic promised in the [Module Overview](00-module-overview.md) has been co
 | Classic Reflection vs `MethodHandle` | Both achieve dynamic invocation; `MethodHandle` is lower-level and generally faster/more JIT-friendly. |
 | Annotation retention `SOURCE` vs `RUNTIME` | `SOURCE`: compiler-checked only, discarded after compilation (like `@Override`). `RUNTIME`: retained and discoverable via Reflection while the program runs (required for framework annotations). |
 
-## Consolidated Interview Questions (Module 16)
-
-1. What does the `invokevirtual` bytecode instruction do, and why is it significant?
-2. What is the generational hypothesis, and how does it shape GC design?
-3. What is a stop-the-world pause?
-4. Why can a reader thread see a stale value even after observing a "ready" flag, without synchronization?
-5. What is a memory barrier, and how does it relate to `synchronized`/`volatile`?
-6. What special JMM guarantee do properly-initialized `final` fields receive?
-7. What is Reflection, and how does it power framework "magic" like Jackson/Spring?
-8. What are the real costs of using Reflection?
-9. Why do framework annotations need `RUNTIME` retention?
-10. What is a Dynamic Proxy, and how does Spring's `@Transactional` use it?
-11. What is `MethodHandle`, and why is it generally faster than classic Reflection?
-12. What does `invokedynamic` enable, and how does it relate to lambda expressions?
-
-*(Full reasoning for every answer is in the respective topic file.)*
-
-## Module Exercises
-
-1. **Recall test:** From memory, explain what `invokevirtual` does and why it's the concrete bytecode confirmation of Module 05's polymorphism.
-2. **Hands-on:** Compile a small class with an overridden method, a static method, and a `private` method, then use `javap -c` to find and compare `invokevirtual`, `invokestatic`, and `invokespecial` in the output.
-3. **Hands-on:** Write a custom `@Retention(RUNTIME)` annotation, apply it to a method, and write Reflection-based code that discovers and invokes annotated methods, mimicking a minimal JUnit-style test runner.
-4. **Hands-on:** Implement a Dynamic Proxy that logs every method call's name and timing around a real implementation.
-5. **Conceptual:** For each scenario, choose the most appropriate GC and justify it: (a) a small CLI tool, (b) a latency-critical trading system with a 64GB heap, (c) a high-throughput nightly batch job.
-6. **Synthesis:** Explain, end to end, referencing Topics 4–5 directly, how a minimal dependency-injection framework could use annotations (`@Inject`) plus Reflection to automatically construct and wire two classes together, without either class needing to know about the framework itself.
-
 ## What's Next
 
 Module 16 completed the deepest, most mechanistic tier of this course's JVM coverage — you now understand not just what Java does, but precisely how, down to the bytecode and memory-model level. **Module 17 — Functional Programming** shifts to a completely different, higher-level lens: lambda expressions (now grounded in this module's `invokedynamic` mechanism), functional interfaces, method references, and the paradigm shift Java 8 introduced — one of the most significant changes in Java's entire history (Module 01, Topic 2's timeline flagged this repeatedly).
-
----
-
-**Previous:** [06 — Method Handles & Modern Internals](06-method-handles-and-modern-internals.md) · **Module Overview:** [00 — Module Overview](00-module-overview.md)
-
-**Type "Continue" to begin Module 17 — Functional Programming.**

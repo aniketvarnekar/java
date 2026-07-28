@@ -21,24 +21,26 @@ Module 02 and Module 07 established *what* the GC does (reclaim unreachable obje
 **This single observation drives the entire structure of modern generational garbage collectors** — rather than scanning the **entire** Heap every single time, the Heap is subdivided into **generations**, and the GC focuses its effort disproportionately on the region where most garbage actually accumulates:
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│                              HEAP                                       │
-│                                                                         │
-│   ┌───────────────────────────────┐  ┌───────────────────────────┐  │
-│   │         YOUNG GENERATION           │  │       OLD GENERATION            │  │
-│   │  (new objects allocated HERE)       │  │  (long-surviving objects         │  │
-│   │                                       │  │   PROMOTED here)                  │  │
-│   │  ┌─────────┐ ┌────────┐ ┌────────┐│  │                                     │  │
-│   │  │  Eden      │ │Survivor 0│ │Survivor 1││  │  Collected LESS often            │  │
-│   │  │(most objects│ │            │ │            ││  │  (objects here have already      │  │
-│   │  │ allocated    │ │            │ │            ││  │   proven they're long-lived,      │  │
-│   │  │ here first)  │ │            │ │            ││  │   so scanning them constantly       │  │
-│   │  └─────────┘ └────────┘ └────────┘│  │   would be WASTED effort)              │  │
-│   │  Collected FREQUENTLY,               │  │                                     │  │
-│   │  cheaply ("Minor GC")                   │  │  A "Major/Full GC" collects          │  │
-│   └───────────────────────────────┘  │  this region (and often everything)   │  │
-│                                                        └───────────────────────────┘  │
-└─────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                            HEAP                                                      │
+│                                                                                                      │
+│  ┌──────────────────────────────────────────────┐      ┌──────────────────────────────────────────┐  │
+│  │               YOUNG GENERATION               │      │              OLD GENERATION              │  │
+│  │        (new objects allocated HERE)          │      │      (long-surviving objects             │  │
+│  │                                              │      │       PROMOTED here)                     │  │
+│  │  ┌────────────┐ ┌────────────┐ ┌────────────┐│      │                                          │  │
+│  │  │    Eden    │ │ Survivor 0 │ │ Survivor 1 ││      │ Collected LESS often                     │  │
+│  │  │ (most      │ │            │ │            ││      │ (objects here have already proven        │  │
+│  │  │ objects    │ │            │ │            ││      │ they're long-lived, so scanning          │  │
+│  │  │ allocated  │ │            │ │            ││      │ them constantly would be WASTED          │  │
+│  │  │ here first)│ │            │ │            ││      │ effort)                                  │  │
+│  │  └────────────┘ └────────────┘ └────────────┘│      │                                          │  │
+│  │                                              │      │ A "Major/Full GC" collects this          │  │
+│  │ Collected FREQUENTLY, cheaply                │      │ region (and often everything)            │  │
+│  │ ("Minor GC")                                 │      │                                          │  │
+│  └──────────────────────────────────────────────┘      └──────────────────────────────────────────┘  │
+│                                                                                                      │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 **How promotion works**: new objects are allocated in **Eden**. A **Minor GC** (frequent, cheap, since Eden is typically small and most objects there are already garbage by the time it runs) copies surviving objects into a **Survivor** space. Objects that **survive multiple** Minor GC cycles (proving they're not short-lived after all) get **promoted** to the **Old Generation**, which is collected far less frequently, since (per the generational hypothesis) most objects that make it there tend to stay reachable for a long time — scanning them on every Minor GC would be wasted effort.
@@ -131,13 +133,3 @@ Think of **Serial GC** like **closing an entire small shop to do a full inventor
 - The **generational hypothesis** (most objects die young) motivates dividing the Heap into Young (Eden + Survivor, collected frequently) and Old (collected less often) generations.
 - **Stop-the-world (STW) pauses** are the central GC design challenge; algorithm evolution has progressively minimized their duration.
 - **Serial** (simple, single-threaded), **Parallel** (multi-threaded, throughput-optimized), **G1** (region-based, targeted pause times, modern default), and **ZGC/Shenandoah** (mostly concurrent, sub-millisecond pauses, latency-optimized) represent progressively more sophisticated points on the throughput-vs-latency trade-off curve.
-
-## Exercises
-
-1. Explain, in your own words, why dividing the Heap into generations is more efficient than scanning the entire Heap on every single garbage collection cycle.
-2. Explain what a stop-the-world pause is, and why it's fundamentally necessary (at least briefly) for safe garbage collection.
-3. For each scenario, name the most appropriate GC choice and justify it: (a) a small CLI tool, (b) a high-throughput batch data processing job where occasional longer pauses are acceptable, (c) a real-time trading system requiring consistent sub-millisecond response times on a 64GB heap.
-
----
-
-**Previous:** [01 — Bytecode Deep Dive](01-bytecode-deep-dive.md) · **Next:** [03 — Java Memory Model Deep Dive](03-java-memory-model-deep-dive.md)

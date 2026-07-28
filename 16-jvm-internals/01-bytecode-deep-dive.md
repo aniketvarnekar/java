@@ -19,24 +19,35 @@ Module 01, Topic 5 showed you a tiny, illustrative bytecode snippet (`iconst_1`,
 A compiled `.class` file is a precisely-specified binary format, containing (among other things):
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│  Magic Number: 0xCAFEBABE   (identifies this as a           │
-│                                valid Java class file)         │
-│  Version numbers (major/minor -- which Java version           │
-│                    this bytecode targets)                       │
-│  Constant Pool (Module 02, Topic 3's "runtime constant           │
-│                  pool" starts here -- string literals,             │
-│                  class/method/field names, referenced as            │
-│                  numbered entries throughout the rest of the file)   │
-│  Access flags (public, final, abstract, ...)                          │
-│  This class / superclass / interfaces                                   │
-│  Fields (name, type, modifiers)                                           │
-│  Methods (name, signature, modifiers, and — for each                       │
-│           non-abstract method — its actual BYTECODE                         │
-│           instructions)                                                       │
-│  Attributes (additional metadata: source file name,                            │
-│              line number tables for debugging, etc.)                             │
-└─────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────────────────┐
+│ Magic Number: 0xCAFEBABE                                                                 │
+│   (identifies this as a valid Java class file)                                           │
+│                                                                                          │
+│ Version numbers (major/minor)                                                            │
+│   (which Java version this bytecode targets)                                             │
+│                                                                                          │
+│ Constant Pool                                                                            │
+│   (Module 02, Topic 3's "runtime constant pool" starts here —                            │
+│    string literals, class/method/field names, referenced as                              │
+│    numbered entries throughout the rest of the file)                                     │
+│                                                                                          │
+│ Access flags                                                                             │
+│   (public, final, abstract, ...)                                                         │
+│                                                                                          │
+│ This class / superclass / interfaces                                                     │
+│                                                                                          │
+│ Fields                                                                                   │
+│   (name, type, modifiers)                                                                │
+│                                                                                          │
+│ Methods                                                                                  │
+│   (name, signature, modifiers, and—for each                                              │
+│    non-abstract method—its actual BYTECODE                                               │
+│    instructions)                                                                         │
+│                                                                                          │
+│ Attributes                                                                               │
+│   (additional metadata: source file name,                                                │
+│    line number tables for debugging, etc.)                                               │
+└──────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 **The famous `0xCAFEBABE` magic number** is a real, whimsical detail from Java's early history — every valid `.class` file begins with these exact four bytes, letting the JVM (or any tool) instantly verify "is this actually a Java class file" before attempting to parse anything further.
@@ -148,13 +159,3 @@ Think of the `.class` file format like a **standardized shipping manifest format
 - A `.class` file is a precisely-specified binary format (starting with the `0xCAFEBABE` magic number) containing the constant pool, class metadata, fields, and each method's actual bytecode instructions.
 - **`javap -c`** disassembles a compiled class into human-readable bytecode, letting you verify exactly how Java source constructs compile.
 - The **`invoke*` family** of instructions directly implements Java's method-call semantics — `invokevirtual`/`invokeinterface` are the concrete mechanism behind dynamic dispatch (Module 05, Topic 5); `invokestatic`/`invokespecial` are resolved at compile time.
-
-## Exercises
-
-1. Compile a small class with an overridden instance method and a static method, then use `javap -c` to find and compare the `invokevirtual` and `invokestatic` instructions used to call each.
-2. Compile a class with no explicit constructor, and use `javap -c` to find the compiler-generated default constructor's bytecode — identify the `invokespecial` call to `Object`'s constructor.
-3. Predict what bytecode instructions a simple `if (x > 0) { return 1; } else { return 0; }` might compile to, then verify using `javap -c`.
-
----
-
-**Previous:** [00 — Module Overview](00-module-overview.md) · **Next:** [02 — Garbage Collection Algorithms](02-garbage-collection-algorithms.md)
