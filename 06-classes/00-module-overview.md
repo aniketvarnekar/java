@@ -12,7 +12,7 @@ Module 05 taught you OOP *concepts* using deliberately minimal class syntax. Thi
 4. **[Static Members](04-static-members.md)** — static fields, methods, and blocks; precisely when `static` is the right (and wrong) choice.
 5. **[Initialization Blocks & Object Creation Order](05-initialization-blocks-and-object-creation-order.md)** — instance initializer blocks, and the exact, complete order of execution when an object is created — tying directly back to Module 02's class loading.
 6. **[Nested & Inner Classes](06-nested-and-inner-classes.md)** — static nested classes, (non-static) inner classes, local classes, and anonymous classes — what each is for, and how they differ.
-7. **[Module Summary, Interview Questions & Exercises](07-module-summary-exercises.md)** — consolidated recap, quiz, and practice problems.
+7. **[Module Summary](07-module-summary.md)** — consolidated recap.
 
 ## Prerequisites
 
@@ -22,7 +22,3 @@ Module 05 taught you OOP *concepts* using deliberately minimal class syntax. Thi
 ## How to Study This Module
 
 Topics 2–3 (Constructors, `this`) go together — read them back to back. Topic 5 is the payoff of this entire module: it assembles everything from Topics 2–4 into one precise, complete execution trace, and directly resolves lingering questions from Module 02's class-loading discussion (Topic 2, "when exactly does a class initialize?") by extending it to the *object* level. Topic 6 (Nested Classes) is more reference-oriented — useful to know exists and recognize in others' code, less something you'll write constantly as a beginner.
-
----
-
-**Previous module:** [05 — OOP](../05-oop/00-module-overview.md) · **Next:** [01 — Class Members: Fields & Methods](01-class-members-fields-and-methods.md)
