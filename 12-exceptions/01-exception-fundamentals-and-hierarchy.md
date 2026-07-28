@@ -25,24 +25,26 @@ Programs encounter error conditions constantly — a file that doesn't exist, a 
 ## The Complete `Throwable` Hierarchy
 
 ```
-                                    Object
-                                       │
-                                  Throwable
-                                       │
-                   ┌───────────────────┴───────────────────┐
-                   ▼                                         ▼
-                 Error                                    Exception
-          (serious, unrecoverable                              │
-           JVM/system-level problems)          ┌────────────────┴────────────────┐
-                   │                              ▼                                  ▼
-     ┌─────────────┼─────────────┐        RuntimeException                  (all other Exception
-     ▼             ▼             ▼        (UNCHECKED)                        subclasses --
-OutOfMemoryError StackOverflowError  ...        │                              CHECKED)
-                                          ┌───────┼───────┬──────────────┐            │
-                                          ▼       ▼       ▼              ▼            ▼
-                              NullPointerException  ArrayIndexOutOf  ClassCastException  IOException
-                                                      BoundsException                     SQLException
-                                                                                           (etc.)
+                              Object
+                                │
+                            Throwable
+                                │
+            ┌───────────────────┴───────────────────┐
+            ▼                                       ▼
+          Error                                 Exception
+   (serious, unrecoverable                          │
+    JVM/system-level problems)                      │
+            │                         ┌─────────────┴──────────────┐
+            │                         ▼                            ▼
+            │                 RuntimeException         All other Exceptions
+            │                    (UNCHECKED)                 (CHECKED)
+            │                         │                            │
+            ▼                         ▼                            ▼
+   OutOfMemoryError     NullPointerException             IOException
+   StackOverflowError   ArrayIndexOutOfBoundsException   SQLException
+   AssertionError       ClassCastException               ClassNotFoundException
+   ...                  IllegalArgumentException         InterruptedException
+                        ...                              ...
 ```
 
 **Every single exception you've encountered in this course inherits from `Throwable`** — the root of this entire hierarchy, and (per Module 07, Topic 1) itself ultimately inheriting from `Object`.
@@ -164,13 +166,3 @@ Think of the `Throwable` hierarchy like a **hospital's triage classification**. 
 - Every exception is an object extending `Throwable`, which splits into `Error` (serious, generally uncatchable) and `Exception` (application-handleable, further split into checked/unchecked — Topic 2).
 - `try` marks risky code; `catch` handles a matching exception type (checked top-to-bottom, first match wins); `finally` always runs.
 - Catch blocks must be ordered most-specific to least-specific; violating this is a compile error, not just a logic bug, since Java's compiler proves unreachability via the inheritance hierarchy.
-
-## Exercises
-
-1. Draw the `Throwable` hierarchy from memory, correctly placing `Error`, `Exception`, `RuntimeException`, and at least three specific exception types you've encountered in this course.
-2. Write a `try`/`catch`/`finally` block that divides by zero, catches `ArithmeticException`, and prints a message from `finally` — predict and verify the exact output order.
-3. Explain, precisely, why the compiler flags an "unreachable catch block" error for badly-ordered catch clauses, referencing Module 05's inheritance/IS-A concept directly.
-
----
-
-**Previous:** [00 — Module Overview](00-module-overview.md) · **Next:** [02 — Checked vs. Unchecked Exceptions](02-checked-vs-unchecked-exceptions.md)

@@ -11,7 +11,7 @@ Every module since Module 01 has occasionally mentioned an exception in passing 
 3. **[Try-Catch-Finally Deep Dive](03-try-catch-finally-deep-dive.md)** — multi-catch, `finally`'s absolute execution guarantee (and its surprising interaction with `return`), and exception chaining.
 4. **[Try-With-Resources & `AutoCloseable`](04-try-with-resources-and-autocloseable.md)** — the complete mechanics of deterministic resource cleanup, finally delivering on Module 07, Topic 5's preview in full.
 5. **[Custom Exceptions & Best Practices](05-custom-exceptions-and-best-practices.md)** — designing your own exception types, exception chaining/`cause`, and real anti-patterns to avoid.
-6. **[Module Summary, Interview Questions & Exercises](06-module-summary-exercises.md)** — consolidated recap, quiz, and practice problems.
+6. **[Module Summary](06-module-summary.md)** — consolidated recap.
 
 ## Prerequisites
 
@@ -22,7 +22,3 @@ Every module since Module 01 has occasionally mentioned an exception in passing 
 ## How to Study This Module
 
 Topic 2 is where this module earns its depth — the checked/unchecked distinction is one of Java's most debated design decisions, and understanding *both* the original reasoning and the real, legitimate criticisms it's received over 25+ years makes you far more equipped to reason about exception design in your own code than simply memorizing "checked extends Exception, unchecked extends RuntimeException." Topic 4 directly resolves the `finalize()` cautionary tale from Module 07, Topic 5.
-
----
-
-**Previous module:** [11 — Generics](../11-generics/00-module-overview.md) · **Next:** [01 — Exception Fundamentals & Hierarchy](01-exception-fundamentals-and-hierarchy.md)
