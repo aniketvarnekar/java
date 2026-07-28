@@ -1,4 +1,4 @@
-# Module 10 Summary, Interview Questions & Exercises
+# Module 10 Summary
 
 ## Topic Coverage Verification
 
@@ -32,39 +32,6 @@ Every topic promised in the [Module Overview](00-module-overview.md) has been co
 | `Comparable` vs `Comparator` | One built-in natural order on the class itself vs. unlimited external, pluggable orderings. |
 | `Collections.unmodifiableList` vs `List.of` | A restricted view of a still-mutable original (changes show through) vs. a genuinely independent immutable collection. |
 
-## Consolidated Interview Questions (Module 10)
-
-1. Why doesn't `Map` extend `Collection`?
-2. What's the internal structural difference between `ArrayList` and `LinkedList`, and why does `ArrayList` usually win in practice despite `LinkedList`'s better theoretical Big-O for some operations?
-3. Why does `HashSet` require correct `equals()`/`hashCode()` on its elements?
-4. Explain, step by step, what happens internally when you call `hashMap.put(key, value)`.
-5. What is HashMap's load factor, and what is Java 8's treeification optimization?
-6. Does `TreeSet` use `equals()` for duplicate detection?
-7. Why does `Queue` provide both `add`/`offer`, `remove`/`poll`, and `element`/`peek` method pairs?
-8. How does `PriorityQueue` determine what `poll()` returns, and is its iteration order sorted?
-9. What powers the enhanced for-each loop?
-10. Why does modifying a list directly during a for-each loop over it throw `ConcurrentModificationException`?
-11. What's the difference between `Comparable` and `Comparator`?
-12. Does `Collections.unmodifiableList` create an independent copy?
-13. Why are `Collections.synchronizedMap`/`synchronizedList` considered largely superseded?
-
-*(Full reasoning for every answer is in the respective topic file.)*
-
-## Module Exercises
-
-1. **Recall test:** Redraw the full Collections Framework hierarchy from memory (Topic 1), then separately write out `HashMap.put`'s complete algorithm step by step (Topic 4).
-2. **Hands-on:** Implement a `Book` class with correct `equals()`/`hashCode()` (Module 07) and `Comparable` (by title), then demonstrate storing it correctly in a `HashSet`, sorting a `List<Book>` via `Collections.sort`, and maintaining a `TreeSet<Book>`.
-3. **Hands-on:** Build a small word-frequency counter using `HashMap<String, Integer>` and `computeIfAbsent`/`merge` (research these `Map` convenience methods), then print results sorted by frequency descending using a `Comparator`.
-4. **Hands-on:** Reproduce and then correctly fix `ConcurrentModificationException` using both `Iterator.remove()` and `removeIf(...)`.
-5. **Conceptual:** Explain, referencing Topics 2 and 5, why `ArrayDeque` and `ArrayList` share a common design philosophy advantage over `LinkedList`, connecting this to CPU cache locality specifically.
-6. **Synthesis:** Design a small task-scheduling system using `PriorityQueue<Task>` where `Task implements Comparable<Task>` (ordered by urgency), demonstrating tasks being processed in priority order regardless of insertion order.
-
 ## What's Next
 
 Module 10 gave you the complete, practical Java Collections Framework — the single most-used part of everyday Java development. Throughout this module, you saw `<E>`, `<K,V>` type parameters used constantly without a full explanation of the mechanism behind them. **Module 11 — Generics** now delivers that full explanation: type erasure, bounded type parameters, wildcards (`? extends`, `? super`), and exactly why `List<Integer>` and `List<String>` are, at the bytecode level, more similar than you might expect.
-
----
-
-**Previous:** [08 — The `Collections` Utility Class & Concurrent Collections Preview](08-collections-utility-class-and-concurrent-collections-preview.md) · **Module Overview:** [00 — Module Overview](00-module-overview.md)
-
-**Type "Continue" to begin Module 11 — Generics.**

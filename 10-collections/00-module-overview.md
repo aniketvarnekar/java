@@ -14,7 +14,7 @@ This is one of the largest, most practically important modules in the entire cou
 6. **[Iterators & Iteration](06-iterators-and-iteration.md)** — `Iterator`, `ListIterator`, fail-fast vs. fail-safe, `ConcurrentModificationException`, and what actually powers the for-each loop.
 7. **[`Comparable` & `Comparator`](07-comparable-and-comparator.md)** — natural ordering vs. custom ordering, and sorting collections correctly.
 8. **[The `Collections` Utility Class & Concurrent Collections Preview](08-collections-utility-class-and-concurrent-collections-preview.md)** — `Collections.sort`/`unmodifiableList`/`synchronizedList`, and a preview of `ConcurrentHashMap` (full depth Module 15).
-9. **[Module Summary, Interview Questions & Exercises](09-module-summary-exercises.md)** — consolidated recap, quiz, and practice problems.
+9. **[Module Summary](09-module-summary.md)** — consolidated recap.
 
 ## Prerequisites
 
@@ -25,7 +25,3 @@ This is one of the largest, most practically important modules in the entire cou
 ## How to Study This Module
 
 This module is large because Collections genuinely is the single most-used part of everyday Java. Topics 2–5 follow a consistent rhythm: interface first, then implementations compared. Topic 4 (`Map`) deserves particular attention — `HashMap`'s internal bucket/treeification mechanics are one of the most commonly asked deep-dive interview topics in all of Java. Topic 6 resolves a subtle but important runtime behavior (`ConcurrentModificationException`) that trips up even experienced developers.
-
----
-
-**Previous module:** [09 — Arrays](../09-arrays/00-module-overview.md) · **Next:** [01 — Collections Framework Overview](01-collections-framework-overview.md)

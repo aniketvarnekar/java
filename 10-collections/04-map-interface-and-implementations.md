@@ -44,16 +44,26 @@ This is the heart of this topic. Understanding it precisely is what separates "I
 Internally, `HashMap` maintains an **array of "buckets"** (historically implemented as linked lists per bucket; see the Java 8 treeification note below). The array's size is always a power of 2 (a specific, deliberate implementation choice enabling a fast bitwise operation instead of a slower modulo, for computing bucket indices).
 
 ```
- HashMap's internal bucket array (default initial capacity: 16):
+HashMap Internal Bucket Array (Default Initial Capacity: 16)
 
- index:   0     1     2     3     4    ...   15
-        ┌───┐ ┌───┐ ┌───┐ ┌───┐ ┌───┐       ┌───┐
-        │ ∅  │ │ ∅  │ │ ●  │ │ ∅  │ │ ●  │  ...  │ ∅  │
-        └───┘ └───┘ └───┘ └───┘ └───┘       └───┘
-                       │           │
-                       ▼           ▼
-                 ["cat"→5]    ["dog"→3] → ["fog"→7]   <- COLLISION: two different keys
-                                                            landed in the SAME bucket!
+Index:
+         0      1      2      3      4                     15
+      ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐                ┌────┐
+      │ ∅  │ │ ∅  │ │ ●  │ │ ∅  │ │ ●  │      ...       │ ∅  │
+      └────┘ └────┘ └──┬─┘ └────┘ └──┬─┘                └────┘
+                       │             │
+                       ▼             ▼
+                 ┌─────────┐   ┌─────────┐
+                 │ "cat"→5 │   │ "dog"→3 │
+                 └─────────┘   └────┬────┘
+                                    │
+                                    ▼
+                              ┌─────────┐
+                              │ "fog"→7 │
+                              └─────────┘
+
+Collision: "dog" and "fog" hash to the SAME bucket,
+so they are stored in the same bucket (shown here as a linked chain).
 ```
 
 ### The `put(key, value)` Algorithm, Step by Step
@@ -177,14 +187,3 @@ Think of `HashMap`'s bucket array like a **hotel with numbered floors**, where a
 - **Java 8's treeification** converts long collision chains (8+ entries) into balanced Red-Black Trees, capping worst-case lookup at O(log n).
 - `LinkedHashMap` adds insertion-order iteration; `TreeMap` maintains sorted-by-key order (via `compareTo`/`Comparator`, not `equals()`/`hashCode()`) at O(log n).
 - `Hashtable` is obsolete, exactly like `Vector` — use `HashMap` or `ConcurrentHashMap` (Module 15) instead.
-
-## Exercises
-
-1. From memory, walk through the complete `put(key, value)` algorithm step by step, including what happens on a hash collision.
-2. Explain, precisely, why a `HashMap` with a poorly-implemented key class's `equals()`/`hashCode()` can silently "lose" entries — connect your answer to Module 07, Topic 3's `HashSet.contains()` failure example.
-3. Explain why Java 8's treeification optimization was added, and what specific worst-case scenario it defends against.
-4. Given `Map<String, List<String>> groups = new HashMap<>();`, write code that correctly adds a value to the list for a given key, creating a new empty list first if the key isn't already present (hint: research `computeIfAbsent`, a modern `Map` convenience method).
-
----
-
-**Previous:** [03 — The `Set` Interface & Implementations](03-set-interface-and-implementations.md) · **Next:** [05 — Queue & Deque](05-queue-and-deque.md)

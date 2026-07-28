@@ -21,31 +21,41 @@ Module 09 established that raw arrays are fixed-size and offer minimal built-in 
 ## The Complete Hierarchy
 
 ```
-                                Iterable<E>
-                                     │
+                                  Iterable<E>
+                                       │
+                                       ▼
                                 Collection<E>
-                                     │
-              ┌──────────────────────┼──────────────────────┐
-              ▼                        ▼                        ▼
-           List<E>                  Set<E>                   Queue<E>
-              │                        │                        │
-   ┌──────────┼──────────┐    ┌──────────┼──────────┐     ┌────────┼────────┐
-   ▼          ▼          ▼    ▼          ▼          ▼     ▼                 ▼
-ArrayList  LinkedList  Vector HashSet LinkedHashSet TreeSet PriorityQueue   Deque
-                                          │                                   │
-                                    (extends HashSet)                 ┌───────┼───────┐
-                                                                         ▼               ▼
-                                                                    ArrayDeque      LinkedList
-                                                                                    (implements
-                                                                                     BOTH List AND Deque!)
+                                       │
+             ┌─────────────────────────┼─────────────────────────┐
+             │                         │                         │
+             ▼                         ▼                         ▼
+          List<E>                   Set<E>                  Queue<E>
+             │                         │                         │
+   ┌─────────┼─────────┐     ┌─────────┼──────────┐     ┌────────┼────────┐
+   │         │         │     │         │          │     │                 │
+   ▼         ▼         ▼     ▼         ▼          ▼     ▼                 ▼
+ArrayList LinkedList Vector HashSet LinkedHashSet TreeSet PriorityQueue   Deque
+                                      │                                   │
+                                      │                                   ├───────────────┐
+                                      ▼                                   ▼               ▼
+                              (extends HashSet)                    ArrayDeque     LinkedList
+                                                                                  (implements
+                                                                                   BOTH List
+                                                                                   and Deque!)
 
-                                        (SEPARATE hierarchy -- NOT a Collection)
-                                Map<K,V>
-                                     │
-              ┌──────────────────────┼──────────────────────┐
-              ▼                        ▼                        ▼
-           HashMap                LinkedHashMap              TreeMap
-        (extends HashMap)
+
+
+                     (Separate Hierarchy — NOT a Collection)
+
+                                  Map<K, V>
+                                       │
+             ┌─────────────────────────┼─────────────────────────┐
+             │                         │                         │
+             ▼                         ▼                         ▼
+         HashMap               LinkedHashMap               TreeMap
+                                   │
+                                   ▼
+                           (extends HashMap)
 ```
 
 ## Walking Through the Hierarchy
@@ -120,13 +130,3 @@ Think of the Collections Framework hierarchy like a **library's organizational s
 - `Map` is deliberately not a `Collection`, since its key-value-pair nature doesn't fit `Collection`'s single-element contract — bridged via `keySet()`/`values()`/`entrySet()`.
 - `Iterable` is the universal foundation powering the for-each loop across arrays, every built-in collection, and any custom type you implement it for.
 - Generics (`<E>`, `<K,V>`) parameterize every collection type with the specific type(s) it holds — full depth in Module 11.
-
-## Exercises
-
-1. Redraw the full Collections Framework hierarchy diagram from memory, correctly placing `List`, `Set`, `Queue`, `Deque`, and `Map`.
-2. Explain, in your own words, why forcing `Map` to implement `Collection` would produce a dishonest or awkward API — reference `add(E)` specifically.
-3. Explain how you would iterate over a `Map<String, Integer>`'s key-value pairs, given that `Map` itself isn't directly for-each-able the way a `List` is.
-
----
-
-**Previous:** [00 — Module Overview](00-module-overview.md) · **Next:** [02 — The `List` Interface & Implementations](02-list-interface-and-implementations.md)

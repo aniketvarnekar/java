@@ -36,12 +36,16 @@ names.size();                                 // current element count
 Recall Module 09, Topic 4 in full: `ArrayList` maintains an internal array, growing via `Arrays.copyOf`-style reallocation when capacity is exceeded.
 
 ```
- ArrayList's internal structure:
- ┌──────────────────────────────┐
- │  backing array: [A, B, C, _, _]  │   <- contiguous, indexed, just like a raw array
- │  size = 3  (elements actually used) │
- │  capacity = 5  (total array length)  │
- └──────────────────────────────┘
+ArrayList Internal Structure
+
+┌────────────────────────────────────────────────────┐
+│ Backing Array                                      │
+│                                                    │
+│ [ A ][ B ][ C ][ _ ][ _ ]                          │
+│                                                    │
+│ size     = 3   (elements currently stored)         │
+│ capacity = 5   (length of the backing array)       │
+└────────────────────────────────────────────────────┘
 ```
 
 **Performance characteristics, precisely:**
@@ -59,19 +63,21 @@ Recall Module 09, Topic 4 in full: `ArrayList` maintains an internal array, grow
 `LinkedList` uses a **fundamentally different internal structure**: instead of one contiguous array, it maintains a chain of individually-allocated **nodes**, each holding a value and references to its **previous** and **next** node:
 
 ```
- LinkedList's internal structure:
+LinkedList Internal Structure
 
- head                                                          tail
-  │                                                              │
-  ▼                                                              ▼
-┌───────┐   next  ┌───────┐   next  ┌───────┐   next  ┌───────┐
-│ "A"     │ ──────▶│ "B"     │ ──────▶│ "C"     │ ──────▶│ null    │
-│ prev=null│◀────── │ prev     │◀────── │ prev     │◀────── │ prev     │
-└───────┘         └───────┘         └───────┘         └───────┘
+head                                                               tail
+ │                                                                  │
+ ▼                                                                  ▼
+┌──────────────┐    next    ┌──────────────┐    next    ┌──────────────┐
+│ "A"          │───────────▶│ "B"          │───────────▶│ "C"          │──▶ null
+│ prev = null  │◀───────────│ prev         │◀───────────│ prev         │
+└──────────────┘            └──────────────┘            └──────────────┘
 
-  Each node is its OWN, separately Heap-allocated object (Module 06, Topic 6's
-  static nested Node class, applied EXACTLY as previewed there!) -- NOT contiguous
-  in memory, connected purely via REFERENCES (Module 06, Topic 1)
+Each node is its OWN, separately Heap-allocated object
+(Module 06, Topic 6's static nested Node class, applied EXACTLY as previewed there!)
+
+Nodes are NOT contiguous in memory.
+They are connected purely via REFERENCES (Module 06, Topic 1).
 ```
 
 **This is precisely the `Node` pattern previewed in Module 06, Topic 6's Nested Classes exercises** — `LinkedList`'s actual JDK implementation uses exactly this kind of private, static nested `Node` class internally.
@@ -154,13 +160,3 @@ Think of `ArrayList` like a **numbered row of parking spaces** — you can drive
 - `ArrayList`: array-backed, O(1) random access, O(n) middle insertion/removal, excellent cache locality — the correct default choice.
 - `LinkedList`: node-chain-backed, O(n) random access, O(1) insertion/removal at either end (and via iterator splicing), poorer cache locality — a genuinely narrower, specialized use case than intuition suggests.
 - `Vector` is obsolete legacy code — always prefer `ArrayList` or a proper `java.util.concurrent` collection instead.
-
-## Exercises
-
-1. Explain, precisely, why `ArrayList.get(index)` is O(1) while `LinkedList.get(index)` is O(n), referencing each structure's actual internal layout.
-2. A colleague proposes using `LinkedList` for a program that frequently inserts elements into arbitrary middle positions by index (`list.add(someIndex, value)`, not via an iterator). Explain why this doesn't actually achieve the O(1) insertion benefit `LinkedList` is known for.
-3. Explain why `Vector` is considered obsolete, connecting your answer directly to Module 08, Topic 4's `StringBuilder`/`StringBuffer` comparison.
-
----
-
-**Previous:** [01 — Collections Framework Overview](01-collections-framework-overview.md) · **Next:** [03 — The `Set` Interface & Implementations](03-set-interface-and-implementations.md)
