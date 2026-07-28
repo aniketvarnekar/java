@@ -11,7 +11,7 @@ Module 05 (Topic 4) told you every Java class ultimately inherits from `java.lan
 3. **[`equals()` and `hashCode()`](03-equals-and-hashcode.md)** — the precise contract between them, why breaking it silently corrupts hash-based collections, and how to implement both correctly.
 4. **[Object Cloning](04-object-cloning.md)** — `Cloneable`, shallow vs. deep copying, and why most modern Java code avoids `clone()` entirely in favor of copy constructors.
 5. **[Object Lifecycle & Garbage Collection](05-object-lifecycle-and-garbage-collection.md)** — from `new` to unreachability, why `finalize()` is deprecated, and a preview of `AutoCloseable`/try-with-resources as the modern alternative.
-6. **[Module Summary, Interview Questions & Exercises](06-module-summary-exercises.md)** — consolidated recap, quiz, and practice problems.
+6. **[Module Summary](06-module-summary.md)** — consolidated recap.
 
 ## Prerequisites
 
@@ -22,7 +22,3 @@ Module 05 (Topic 4) told you every Java class ultimately inherits from `java.lan
 ## How to Study This Module
 
 Topic 3 (`equals`/`hashCode`) is the most important, most heavily interview-tested topic in this module — it directly sets up Module 10 (Collections), where `HashMap`/`HashSet` correctness depends entirely on getting this contract right. Topic 5 closes the object lifecycle loop opened in Module 02 and previews concepts (try-with-resources, `AutoCloseable`) that get full treatment in Module 12 (Exceptions) and Module 13 (IO).
-
----
-
-**Previous module:** [06 — Classes](../06-classes/00-module-overview.md) · **Next:** [01 — The `Object` Class](01-the-object-class.md)
