@@ -11,7 +11,7 @@ Module 17 gave you lambdas, method references, and `Function`/`Predicate`/`Consu
 3. **[Terminal Operations & `reduce`](03-terminal-operations-and-reduce.md)** — `forEach`, `collect`, `reduce`, `count`, matching operations, and `min`/`max`.
 4. **[`Collectors`](04-collectors.md)** — `toList`, `toMap`, `groupingBy`, `joining`, `partitioningBy`, and summary statistics.
 5. **[Parallel Streams](05-parallel-streams.md)** — how they actually work (the `ForkJoinPool`), and when they genuinely help vs. hurt.
-6. **[Module Summary, Interview Questions & Exercises](06-module-summary-exercises.md)** — consolidated recap, quiz, and practice problems.
+6. **[Module Summary](06-module-summary.md)** — consolidated recap.
 
 ## Prerequisites
 
@@ -22,7 +22,3 @@ Module 17 gave you lambdas, method references, and `Function`/`Predicate`/`Consu
 ## How to Study This Module
 
 Topic 1's mental model — a stream pipeline is a **description** of a computation, not the computation itself, until a terminal operation runs it — is the single most important conceptual foundation for this entire module; get it right before moving to Topics 2–3's specific operations. Topic 5 (parallel streams) is deliberately last, and deliberately cautious — parallel streams are genuinely oversold in casual tutorials, and this module gives you the honest trade-offs.
-
----
-
-**Previous module:** [17 — Functional Programming](../17-functional-programming/00-module-overview.md) · **Next:** [01 — Stream Fundamentals](01-stream-fundamentals.md)

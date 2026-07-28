@@ -12,7 +12,7 @@ This module has two jobs. First, it teaches the remaining major language feature
 2. **[Sealed Classes](02-sealed-classes.md)** — restricting inheritance on purpose, `sealed`/`permits`/`non-sealed`, and why sealed hierarchies unlock exhaustiveness checking.
 3. **[Pattern Matching](03-pattern-matching.md)** — `instanceof` pattern matching, `switch` pattern matching, record patterns (destructuring), guarded patterns (`when`), and exhaustive `switch` over sealed types.
 4. **[Modern Java Recap & What's New Through Java 25](04-modern-java-recap-and-whats-new.md)** — a consolidated timeline of every major feature since Java 8, pointers back to where each was taught, and full first-time coverage of features that don't warrant a standalone topic: Sequenced Collections, Stream Gatherers, unnamed variables/patterns, Scoped Values, the Foreign Function & Memory API, and the status of String Templates.
-5. **[Module Summary, Interview Questions & Exercises](05-module-summary-exercises.md)** — consolidated recap, quiz, and practice problems.
+5. **[Module Summary](05-module-summary.md)** — consolidated recap.
 
 ## Prerequisites
 
@@ -25,7 +25,3 @@ This module has two jobs. First, it teaches the remaining major language feature
 ## How to Study This Module
 
 Read Topics 1–3 in order — Records, then Sealed Classes, then Pattern Matching — because Topic 3's most powerful form (exhaustive `switch` with record patterns) is literally a combination of Topics 1 and 2. Topic 4 is deliberately structured as a reference map: skim the recap table for features you've already mastered, and read closely only the sections marked "first coverage here." By the end of this module you will have an explicit, dated mental timeline of the entire language's evolution from Java 8 (2014) to Java 25 (2025) — which is one of the most common things interviewers probe for when hiring for modern codebases.
-
----
-
-**Previous module:** [22 — Performance](../22-performance/00-module-overview.md) · **Next:** [01 — Records](01-records.md)

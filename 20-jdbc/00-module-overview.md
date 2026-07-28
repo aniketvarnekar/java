@@ -9,7 +9,7 @@ Nearly every real backend application talks to a database. JDBC (Java Database C
 1. **[JDBC Architecture & Connections](01-jdbc-architecture-and-connections.md)** — the driver-based architecture that makes JDBC vendor-neutral, and `Connection`.
 2. **[Statements, `ResultSet` & SQL Injection](02-statements-resultset-and-sql-injection.md)** — `Statement` vs. `PreparedStatement`, and precisely how the latter prevents SQL injection.
 3. **[Transactions & Connection Pooling](03-transactions-and-connection-pooling.md)** — `commit`/`rollback`, the ACID properties, and why connection pooling exists — directly extending Module 15's thread-pool reasoning.
-4. **[Module Summary, Interview Questions & Exercises](04-module-summary-exercises.md)** — consolidated recap, quiz, and practice problems.
+4. **[Module Summary](04-module-summary.md)** — consolidated recap.
 
 ## Prerequisites
 
@@ -20,7 +20,3 @@ Nearly every real backend application talks to a database. JDBC (Java Database C
 ## How to Study This Module
 
 Topic 2's SQL injection coverage is the single most practically important, real-world-consequential piece of this module — genuinely one of the most common, most damaging real security vulnerabilities in production software, and one Java's `PreparedStatement` makes straightforward to prevent entirely. Topic 3's connection pooling discussion is deliberately framed as a direct parallel to Module 15, Topic 5 — the exact same "reuse expensive resources instead of creating them per-use" reasoning, applied to database connections instead of threads.
-
----
-
-**Previous module:** [19 — Networking](../19-networking/00-module-overview.md) · **Next:** [01 — JDBC Architecture & Connections](01-jdbc-architecture-and-connections.md)

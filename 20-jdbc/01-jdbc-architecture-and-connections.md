@@ -19,23 +19,24 @@ Every ORM (Hibernate), every Spring Data repository, every raw SQL query in a Ja
 > **JDBC (Java Database Connectivity)** is a standard **API** (a set of interfaces: `Connection`, `Statement`, `ResultSet`, and more) that different database vendors implement via a **driver** — a vendor-specific library translating JDBC's standard calls into that specific database's actual wire protocol.
 
 ```
-                    Your Application Code
-                     (writes to the JDBC API --
-                      Connection, Statement, ResultSet)
-                              │
-                              ▼
-                    ┌───────────────────┐
-                    │   JDBC API (interfaces) │
-                    └───────────┬───────────┘
-                                 │
-              ┌──────────────────┼──────────────────┐
-              ▼                    ▼                    ▼
-      PostgreSQL Driver      MySQL Driver         Oracle Driver
-      (vendor-specific        (vendor-specific       (vendor-specific
-       implementation)         implementation)        implementation)
-              │                    │                    │
-              ▼                    ▼                    ▼
-        PostgreSQL DB          MySQL DB              Oracle DB
+                             Your Application Code
+                      (writes to the JDBC API --
+               Connection, Statement, ResultSet)
+                                      │
+                                      ▼
+                     ┌────────────────────────────────┐
+                     │     JDBC API (interfaces)      │
+                     └───────────────┬────────────────┘
+                                     │
+          ┌──────────────────────────┼──────────────────────────┐
+          │                          │                          │
+          ▼                          ▼                          ▼
+  PostgreSQL Driver            MySQL Driver             Oracle Driver
+ (vendor-specific             (vendor-specific         (vendor-specific
+  implementation)              implementation)          implementation)
+          │                          │                          │
+          ▼                          ▼                          ▼
+   PostgreSQL DB               MySQL DB                 Oracle DB
 ```
 
 **This is precisely Module 05, Topic 6's "program to an interface, not an implementation" principle, applied at the database-connectivity layer**: your application code is written entirely against the **standard JDBC interfaces**, never against a specific vendor's classes directly — meaning switching from PostgreSQL to MySQL (in principle) requires changing only the driver dependency and connection URL, **not** rewriting your actual data-access code, since it was always written against the vendor-neutral interface.
@@ -115,13 +116,3 @@ Think of the JDBC API like a **universal electrical socket standard** — any ap
 - **JDBC** is a standard, vendor-neutral API; database-specific **drivers** implement it, translating standard calls into each database's actual protocol.
 - **`DriverManager.getConnection(url, user, password)`** obtains a `Connection`; modern JDBC (4.0+) automatically discovers the correct driver without explicit `Class.forName(...)`.
 - A **`Connection`** is a genuinely expensive resource (real network/authentication overhead) — directly motivating connection pooling (Topic 3).
-
-## Exercises
-
-1. Write code establishing a JDBC connection to a database of your choice (or a well-known example URL), using try-with-resources.
-2. Explain, referencing Module 16, Topic 4, what `Class.forName("org.postgresql.Driver")` actually does, and why modern JDBC no longer requires it.
-3. Explain why "programming to the JDBC interfaces" preserves database portability, and what would be lost if application code referenced vendor-specific driver classes directly.
-
----
-
-**Previous:** [00 — Module Overview](00-module-overview.md) · **Next:** [02 — Statements, `ResultSet` & SQL Injection](02-statements-resultset-and-sql-injection.md)

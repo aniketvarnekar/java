@@ -21,12 +21,15 @@ Every HTTP request, every database connection (Module 20), every message queue c
 **An IP address identifies a specific machine on a network; a port (a number from 0–65535) identifies a specific application/service running on that machine** — a single machine can run many different network services simultaneously (a web server on port 80, a database on port 5432), and the port number is what distinguishes which specific service a connection is meant for.
 
 ```
-      CLIENT                                        SERVER (listening on port 8080)
- ┌──────────────┐                                ┌──────────────────────────┐
- │  initiates a     │  ── connection request ──▶  │  ServerSocket.accept()     │
- │  connection to    │                                │  (waiting/blocking here      │
- │  IP:8080           │  ◀── connection accepted ──   │   until a client connects)   │
- └──────────────┘                                └──────────────────────────┘
+                     CLIENT                                 SERVER (listening on port 8080)
+
+┌────────────────────────────┐                  ┌────────────────────────────────────┐
+│ initiates a                │                  │ ServerSocket.accept()              │
+│ connection to              │── connection ──▶ │ (waiting/blocking here             │
+│ IP:8080                    │     request      │ until a client connects)           │
+│                            │◀─ connection ─── │                                    │
+│                            │    accepted      │                                    │
+└────────────────────────────┘                  └────────────────────────────────────┘
 ```
 
 ## `ServerSocket` and `Socket` — Raw TCP Communication
@@ -115,13 +118,3 @@ Think of an IP address like a **building's street address**, and a port number l
 - **`ServerSocket`**/**`Socket`** provide raw TCP communication, read/written via the exact same `InputStream`/`OutputStream`/`Reader`/`Writer` API from Module 13.
 - Both are `AutoCloseable` (Module 12, Topic 4) — always use try-with-resources.
 - `accept()` (and subsequent reads) are blocking calls — directly, concretely illustrating Module 14, Topic 3's blocking I/O concept, and motivating Topic 2's concurrency-based solutions.
-
-## Exercises
-
-1. Write a minimal `ServerSocket`-based server that accepts one connection, reads a line of text from the client, and echoes it back in uppercase.
-2. Write the corresponding client, connecting to that server, sending a message, and printing the server's response.
-3. Explain, referencing Module 14, Topic 3, precisely why this simple server can only handle one client connection at a time.
-
----
-
-**Previous:** [00 — Module Overview](00-module-overview.md) · **Next:** [02 — Building Servers & Handling Multiple Clients](02-building-servers-and-handling-multiple-clients.md)

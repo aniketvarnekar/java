@@ -9,7 +9,7 @@ This module is the practical, hands-on payoff of nearly everything the course ha
 1. **[JVM Tuning: Heap & GC Selection](01-jvm-tuning-heap-and-gc-selection.md)** — heap sizing flags, and choosing/configuring a garbage collector, directly applying Module 16, Topic 2.
 2. **[Profiling & Benchmarking](02-profiling-and-benchmarking.md)** — why naive `System.nanoTime()` benchmarking is usually wrong (Module 02's JIT warm-up), and the tools that measure correctly.
 3. **[Common Performance Pitfalls & Optimization](03-common-performance-pitfalls-and-optimization.md)** — autoboxing, string concatenation, collection sizing, escape analysis, and a final, practical revisit of GraalVM Native Image's trade-offs.
-4. **[Module Summary, Interview Questions & Exercises](04-module-summary-exercises.md)** — consolidated recap, quiz, and practice problems.
+4. **[Module Summary](04-module-summary.md)** — consolidated recap.
 
 ## Prerequisites
 
@@ -20,7 +20,3 @@ This module is the practical, hands-on payoff of nearly everything the course ha
 ## How to Study This Module
 
 This module deliberately synthesizes rather than introduces brand-new concepts — nearly every topic here is "here's how to actually *apply*, in practice, something you already understand the mechanism of." Topic 2's warning about naive benchmarking is the single most important lesson to internalize — it's a genuine, common, real source of misleading performance conclusions, even among experienced developers.
-
----
-
-**Previous module:** [21 — Modules](../21-modules/00-module-overview.md) · **Next:** [01 — JVM Tuning: Heap & GC Selection](01-jvm-tuning-heap-and-gc-selection.md)

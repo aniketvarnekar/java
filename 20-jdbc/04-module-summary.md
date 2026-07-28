@@ -1,4 +1,4 @@
-# Module 20 Summary, Interview Questions & Exercises
+# Module 20 Summary
 
 ## Topic Coverage Verification
 
@@ -24,35 +24,6 @@ Every topic promised in the [Module Overview](00-module-overview.md) has been co
 | Auto-commit vs. explicit transactions | Auto-commit: each statement independently, immediately permanent. Explicit transaction: multiple statements become permanent together, atomically, via `commit()`/`rollback()`. |
 | `close()` without pooling vs. with pooling | Without: genuinely terminates the connection. With: returns it to the pool for reuse — the discipline of always closing remains identical either way. |
 
-## Consolidated Interview Questions (Module 20)
-
-1. How does JDBC achieve database-vendor neutrality?
-2. Why is `Class.forName("...")` no longer required for driver loading in modern JDBC?
-3. Why is a `Connection` considered an expensive resource?
-4. What is SQL injection, and how does it actually work?
-5. Why does `PreparedStatement` prevent SQL injection, precisely?
-6. Can `PreparedStatement` parameterize a table name?
-7. Why does JDBC's default auto-commit behavior create risk for multi-statement operations?
-8. What do `commit()` and `rollback()` do?
-9. Why does connection pooling exist, and how does `close()`'s behavior change when pooled?
-
-*(Full reasoning for every answer is in the respective topic file.)*
-
-## Module Exercises
-
-1. **Recall test:** Explain, from memory, precisely why `PreparedStatement` structurally prevents SQL injection, not just "escapes" dangerous input.
-2. **Hands-on:** Write vulnerable `Statement`-based login-check code, then rewrite it correctly with `PreparedStatement`.
-3. **Hands-on:** Write a transaction transferring a value between two "accounts" (two rows in a table), correctly using `commit`/`rollback` around a try/catch.
-4. **Hands-on:** Write code iterating a `ResultSet` from a `SELECT` query, printing each row.
-5. **Conceptual:** Explain why connection pooling exists, directly paralleling it to Module 15, Topic 5's thread-pool reasoning.
-6. **Synthesis:** Design a small `UserRepository` class using a connection pool (conceptually), with a `findById` method using `PreparedStatement` and a `transferFunds` method using an explicit transaction — explain each design choice.
-
 ## What's Next
 
 Module 20 completed your foundational database connectivity knowledge — you now understand not just how to use JDBC, but precisely why its key safety mechanisms (`PreparedStatement`, transactions) work the way they do, and how modern frameworks (Spring Data, Hibernate) are built on top of this exact foundation. **Module 21 — Modules** covers the Java Platform Module System (JPMS, Java 9+) — how the JDK itself is organized into modules, and how you can modularize your own applications for stronger encapsulation and more reliable dependency management.
-
----
-
-**Previous:** [03 — Transactions & Connection Pooling](03-transactions-and-connection-pooling.md) · **Module Overview:** [00 — Module Overview](00-module-overview.md)
-
-**Type "Continue" to begin Module 21 — Modules.**

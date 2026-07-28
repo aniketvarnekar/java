@@ -9,26 +9,6 @@ Every topic promised in the [Module Overview](00-module-overview.md) has been co
 - [x] **System-Design-Adjacent Java Questions** — four open-ended judgment questions (expiring cache, connection pool, rate limiter, GC diagnosis process), each modeling assumption-stating and trade-off-naming
 - [x] **Mock Interview Walkthrough & Presentation Guidance** — answer structure, live-coding etiquette, common pitfalls, and a full three-question mock transcript
 
-## Consolidated Interview Questions (Module 24)
-
-1. What's the practical difference between the double-checked-locking singleton and the initialization-on-demand holder idiom?
-2. Why must `wait()` be called inside a `while` loop, not an `if`?
-3. Why doesn't marking every field `final` guarantee a class is genuinely immutable?
-4. Why is `BlockingQueue` usually preferable to hand-rolled `wait()`/`notify()` coordination in real code?
-5. Why should a technical interview answer generally lead with a direct answer before explaining the mechanism?
-6. Why is confidently guessing wrong worse than saying "I'm not certain, but here's my reasoning"?
-7. What's the first step you should take when asked to diagnose high GC pause times in production, and why?
-8. Why should you state assumptions before answering an open-ended system-design-adjacent question?
-
-*(Full reasoning for every answer is in the respective topic file.)*
-
-## Module Exercises
-
-1. **Recall test:** From memory, list all six live-coding problems from Topic 2 and, for each, state the single Java concept it's specifically designed to probe.
-2. **Timed practice:** Answer ten questions from Topic 1, chosen at random, each in under 45 seconds, out loud.
-3. **Full mock:** Recreate Topic 4's three-question mock transcript from a cold start — one conceptual, one live-coding, one system-design-adjacent — narrating the entire time, ideally to another person or recorded for playback review.
-4. **Synthesis:** Pick any two topics from across this entire 24-module course that you initially found hardest (e.g., type erasure from Module 11, or the JMM from Module 15) and prepare a 60-second, interview-ready explanation of each from memory.
-
 ---
 
 ## Course Conclusion
@@ -84,9 +64,3 @@ That's a single example thread — Module 02's foundational memory model — tra
 - **Use the root companion documents as a living reference:** `Glossary.md`, `Interview-Questions.md`, `Cheat-Sheet.md`, and `Exercises.md` now contain a complete, cross-referenced index of this entire course — return to them whenever a real-world problem needs a refresher, rather than re-reading full modules.
 
 This course is complete. What you do with it next is the real test.
-
----
-
-**Previous:** [04 — Mock Interview Walkthrough & Presentation Guidance](04-mock-interview-walkthrough-and-presentation-guidance.md) · **Module Overview:** [00 — Module Overview](00-module-overview.md)
-
-**Course complete — all 24 modules finished.**

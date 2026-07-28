@@ -9,7 +9,7 @@ Module 01, Topic 3 flagged "Distributed" as one of Java's defining features — 
 1. **[Networking Fundamentals & Sockets](01-networking-fundamentals-and-sockets.md)** — the client-server model, and `Socket`/`ServerSocket` for raw TCP communication.
 2. **[Building Servers & Handling Multiple Clients](02-building-servers-and-handling-multiple-clients.md)** — directly applying Module 14's C10K problem and Module 15's thread-pool/Virtual Thread solutions to real network servers.
 3. **[The Modern `HttpClient`](03-the-modern-httpclient.md)** — synchronous and asynchronous HTTP requests, and `CompletableFuture`-based response handling (Module 15, Topic 6).
-4. **[Module Summary, Interview Questions & Exercises](04-module-summary-exercises.md)** — consolidated recap, quiz, and practice problems.
+4. **[Module Summary](04-module-summary.md)** — consolidated recap.
 
 ## Prerequisites
 
@@ -21,7 +21,3 @@ Module 01, Topic 3 flagged "Distributed" as one of Java's defining features — 
 ## How to Study This Module
 
 Topic 1 gives you the low-level foundation; Topic 2 is deliberately positioned to make you apply Modules 14–15's hard-won concurrency knowledge to a genuinely concrete, practical problem — "how do I actually handle many simultaneous client connections?" — rather than learning it in the abstract. Topic 3 is the part you'll use constantly in real backend development: nearly every microservice calls another service via `HttpClient` (or a framework built on the same principles).
-
----
-
-**Previous module:** [18 — Streams](../18-streams/00-module-overview.md) · **Next:** [01 — Networking Fundamentals & Sockets](01-networking-fundamentals-and-sockets.md)

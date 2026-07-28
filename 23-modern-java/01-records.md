@@ -70,21 +70,28 @@ Writing `record Point(int x, int y) { }` causes `javac` to automatically generat
 6. **`toString()`** — in the form `Point[x=1, y=2]`.
 
 ```
- record Point(int x, int y) { }
-        |
-        v
- +----------------------------------------------+
- | final class Point extends Record {            |
- |   private final int x;                        |
- |   private final int y;                         |
- |   public Point(int x, int y) { this.x=x; this.y=y; }
- |   public int x() { return x; }                  |
- |   public int y() { return y; }                   |
- |   public boolean equals(Object o) { ... }          |
- |   public int hashCode() { ... }                     |
- |   public String toString() { ... }                    |
- | }                                                       |
- +----------------------------------------------+
+record Point(int x, int y) { }
+                │
+                ▼
+┌───────────────────────────────────────────────────────────────┐
+│ final class Point extends Record {                            │
+│                                                               │
+│     private final int x;                                      │
+│     private final int y;                                      │
+│                                                               │
+│     public Point(int x, int y) {                              │
+│         this.x = x;                                           │
+│         this.y = y;                                           │
+│     }                                                         │
+│                                                               │
+│     public int x() { return x; }                              │
+│     public int y() { return y; }                              │
+│                                                               │
+│     public boolean equals(Object o) { ... }                   │
+│     public int hashCode() { ... }                             │
+│     public String toString() { ... }                          │
+│ }                                                             │
+└───────────────────────────────────────────────────────────────┘
 ```
 
 **Every record implicitly extends `java.lang.Record`** (an abstract class), which is why records **cannot extend any other class** (Java has no multiple inheritance of state, Module 05, Topic 4) — but a record **can implement interfaces**, exactly like any class.
@@ -218,14 +225,3 @@ A hand-written data class is like **building custom furniture from raw lumber ev
 - Records are **always immutable** and implicitly extend `java.lang.Record`, so they cannot extend another class but can implement interfaces.
 - **Compact constructors** add validation without repeating field assignments; explicit canonical or overloaded constructors are also possible.
 - Records are the right tool for simple, immutable data carriers — the wrong tool for mutable state, class hierarchies, or (usually) JPA entities.
-
-## Exercises
-
-1. Rewrite a hand-written `Point` class (with fields, constructor, getters, `equals()`, `hashCode()`, `toString()`) as a one-line record, and verify the behavior is equivalent.
-2. Write a `Range(int low, int high)` record with a compact constructor that throws `IllegalArgumentException` if `low > high`.
-3. Explain, from memory, why records cannot have additional instance fields beyond their header, and why that restriction is essential to what a record *is*.
-4. Explain why a typical JPA entity is usually a poor fit for a record.
-
----
-
-**Previous:** [00 — Module Overview](00-module-overview.md) · **Next:** [02 — Sealed Classes](02-sealed-classes.md)
