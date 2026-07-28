@@ -15,7 +15,7 @@ This is the module where Java's true identity comes into focus. Module 01 told y
 5. **[Polymorphism](05-polymorphism.md)** — compile-time polymorphism (overloading) vs. runtime polymorphism (overriding), and exactly how the JVM performs dynamic method dispatch.
 6. **[Interfaces & Abstract Classes](06-interfaces-and-abstract-classes.md)** — the two mechanisms for abstraction and contracts, a full comparison, and how interfaces let Java achieve multiple-inheritance-like behavior safely.
 7. **[Association, Aggregation & Composition](07-association-aggregation-composition.md)** — HAS-A relationships between objects, and why "favor composition over inheritance" is a foundational design principle.
-8. **[Module Summary, Interview Questions & Exercises](08-module-summary-exercises.md)** — consolidated recap, quiz, and practice problems.
+8. **[Module Summary](08-module-summary.md)** — consolidated recap.
 
 ## Prerequisites
 
@@ -25,7 +25,3 @@ This is the module where Java's true identity comes into focus. Module 01 told y
 ## How to Study This Module
 
 Topics 2–5 are the classic "four pillars" — study them in order, since each builds vocabulary the next uses. Topic 5 (Polymorphism) is the deepest and most interview-critical — it's where "OOP theory" meets "how the JVM actually runs your code," tying directly back to Module 02. Topic 6 resolves a question every learner eventually asks ("why can't a class extend two classes?") with a precise, mechanical answer, not just a rule to memorize.
-
----
-
-**Previous module:** [04 — Control Flow](../04-control-flow/00-module-overview.md) · **Next:** [01 — Introduction to OOP](01-introduction-to-oop.md)

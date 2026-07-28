@@ -62,7 +62,7 @@ yourCar.color = "Blue";            // THIS object's color is "Blue" -- unrelated
                   │ • speed                          │
                   │                                  │
                   │ Methods                          │
-                  │ • accelerate()                  │
+                  │ • accelerate()                   │
                   └─────────────────┬────────────────┘
                                     │
                      Used to create many objects
@@ -164,13 +164,3 @@ The rest of this module is organized around what's traditionally called the **"f
 - OOP organizes programs around **objects** — bundles of data (state) and the behavior (methods) that operates on it — directly solving procedural programming's "data and functions live far apart" and "reuse is awkward" problems.
 - A **class** is a blueprint (structure/behavior definition, shared, lives in the Method Area); an **object** is an independent instance created from that blueprint (actual data, lives on the Heap).
 - The **four pillars** — Encapsulation, Abstraction, Inheritance, Polymorphism — are the foundational ideas the rest of this module explores in depth.
-
-## Exercises
-
-1. In your own words, explain the difference between a class and an object, using an analogy other than the blueprint/house one used in this topic.
-2. Given a `class Book { String title; boolean isCheckedOut; }`, create (on paper/pseudocode) three independent `Book` objects with different field values, and explain why changing one object's `isCheckedOut` field doesn't affect the others.
-3. Without reading ahead, guess (in one sentence each) what you think "Encapsulation," "Abstraction," "Inheritance," and "Polymorphism" mean, based only on their everyday English meanings — we'll revisit your guesses as each topic unfolds.
-
----
-
-**Previous:** [00 — Module Overview](00-module-overview.md) · **Next:** [02 — Encapsulation](02-encapsulation.md)
