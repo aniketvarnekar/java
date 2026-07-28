@@ -1,4 +1,4 @@
-# Module 02 Summary, Interview Questions & Exercises
+# Module 02 Summary
 
 ## Topic Coverage Verification
 
@@ -29,40 +29,6 @@ Every topic promised in the [Module Overview](00-module-overview.md) has been co
 | C1 vs C2 JIT compiler | C1: fast to compile, modest optimization, for warm code. C2: slow to compile, heavy optimization, reserved for the hottest code — used together via tiered compilation. |
 | Standard JVM execution vs GraalVM Native Image | Standard: bytecode + runtime interpret/JIT, adaptive, portable, has warm-up cost. Native Image: ahead-of-time compiled to a platform-specific native executable, near-instant startup, no runtime adaptivity, loses bytecode portability. |
 
-## Consolidated Interview Questions (Module 02)
-
-1. What are the major subsystems of the JVM, and how do they relate to each other?
-2. What are the three phases of class loading? What happens in each?
-3. When exactly is a class initialized in Java — is it eager or lazy, and what specifically triggers it?
-4. What is the parent delegation model, and what security problem does it solve?
-5. Can two classes with the same fully-qualified name coexist in one JVM? Under what condition?
-6. What's the difference between the Stack and the Heap? Where does an object variable's *reference* live versus the actual *object data*?
-7. What replaced PermGen, when, and why?
-8. What causes a `StackOverflowError` versus an `OutOfMemoryError: Java heap space`?
-9. What is tiered JIT compilation, and why does HotSpot use two compilers (C1/C2) instead of one?
-10. What is JIT de-optimization, and why is it possible only because Java compiles at runtime rather than purely ahead-of-time?
-11. What is JNI, and what does Java give up (safety, portability) at that boundary?
-12. Is "the JVM" one piece of software? Name two real, independent implementations and one key way they differ.
-13. What is GraalVM Native Image, and what does it trade away to achieve near-instant startup?
-
-*(Full reasoning for every answer is in the respective topic file — use this list to self-test before checking back.)*
-
-## Module Exercises
-
-1. **Recall test:** From memory, redraw the full JVM architecture diagram from [Topic 1](01-jvm-architecture-overview.md), then annotate each box with which specific error types or observable behaviors originate from it (e.g., `StackOverflowError` → JVM Stack).
-2. **Hands-on:** Write a small Java program with a `static` initializer block that prints a message, and a `main` method that first merely *declares* a variable of that type, then later *actively uses* it (e.g., accesses a static field). Run it and confirm the initializer only runs at the point of active use, as explained in Topic 2.
-3. **Hands-on:** Write a deliberately infinite (no base case) recursive method and run it to observe a real `StackOverflowError`. Read the stack trace and identify how it reflects the JVM Stack concept from Topic 3.
-4. **Hands-on:** If you have a JDK installed, run any small program with `java -XX:+PrintCompilation YourProgram` (Topic 4) and observe real compilation tier output. Identify at least one line showing a method being compiled.
-5. **Conceptual:** Explain, step by step, why a variable reassignment inside a method never affects the caller's own reference to an object — ground your answer specifically in the Stack-vs-Heap model from Topic 3.
-6. **Conceptual:** A colleague proposes using GraalVM Native Image for a long-running, CPU-intensive backend service that stays warm for weeks at a time. Based on Topic 6, is this likely to help or hurt peak performance, and why?
-7. **Synthesis:** Explain, using concepts from this entire module, why `System.out.println` inside your `HelloWorld.java` from Module 01 actually manages to print anything at all — trace it through class loading, the Method Area's constant pool, the Heap (where the `String` literal object lives), the JVM Stack (the `main` frame), and the Execution Engine.
-
 ## What's Next
 
 Module 02 gave you the JVM's internal architecture: how classes get loaded, where everything lives in memory, how execution actually happens, and how different implementations approach these problems differently. **Module 03 — Java Basics** shifts from "how the JVM works" to "how to actually write Java code" — variables, primitive data types (and exactly how/where they're stored, building directly on this module's Stack/Heap model), operators, and type conversion rules.
-
----
-
-**Previous:** [06 — JVM Implementations](06-jvm-implementations.md) · **Module Overview:** [00 — Module Overview](00-module-overview.md)
-
-**Type "Continue" to begin Module 03 — Java Basics.**

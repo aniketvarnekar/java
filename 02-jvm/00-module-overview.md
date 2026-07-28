@@ -14,7 +14,7 @@ This is the module that separates "someone who uses Java" from "someone who unde
 4. **[Execution Engine](04-execution-engine.md)** — The Interpreter, the tiered JIT compilers (C1/C2), and the Garbage Collector's role, building on the Module 01 preview.
 5. **[Native Method Interface (JNI)](05-native-method-interface.md)** — How Java code calls native (C/C++) code, and why this capability exists at all.
 6. **[JVM Implementations](06-jvm-implementations.md)** — HotSpot vs Eclipse OpenJ9 vs GraalVM — the JVM is a specification, not one program; here's what differs between real implementations.
-7. **[Module Summary, Interview Questions & Exercises](07-module-summary-exercises.md)** — Consolidated recap, quiz, and practice problems.
+7. **[Module Summary](07-module-summary.md)** — Consolidated recap, quiz, and practice problems.
 
 ## Prerequisites
 
@@ -23,7 +23,3 @@ This is the module that separates "someone who uses Java" from "someone who unde
 ## How to Study This Module
 
 Topic 1 gives you the map; keep referring back to it as you go through Topics 2–5, each of which zooms into one region of that map. Topic 3 (Runtime Data Areas) is the most important for day-to-day debugging — `OutOfMemoryError` and `StackOverflowError` both originate from concepts taught there, and it's foundational for Modules 06–07 (Classes/Objects) and Module 16 (JVM Internals, which goes even deeper into bytecode and GC algorithms specifically).
-
----
-
-**Previous module:** [01 — Introduction](../01-introduction/00-module-overview.md) · **Next:** [01 — JVM Architecture Overview](01-jvm-architecture-overview.md)
