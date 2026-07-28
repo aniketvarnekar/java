@@ -182,13 +182,3 @@
 ## Summary
 
 Java's marketed "features" aren't marketing fluff — each maps to a concrete design decision and mechanism: bytecode + JVM (platform independence), the verifier + access control (security), GC + exceptions + static typing (robustness), and the JIT (performance). Understanding the *mechanism* behind each buzzword is what separates a memorized answer from a real understanding — and it's what interviewers are actually listening for.
-
-## Exercises
-
-1. Pick three features from this list and, without looking back, explain the underlying mechanism for each in your own words.
-2. A friend says "Java has no pointers, that's why it's safe." Correct this statement precisely.
-3. Explain why "Simple" is a relative term here — simple *compared to what*, specifically?
-
----
-
-**Previous:** [02 — History of Java](02-history-of-java.md) · **Next:** [04 — JDK vs JRE vs JVM](04-jdk-vs-jre-vs-jvm.md)

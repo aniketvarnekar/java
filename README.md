@@ -92,10 +92,8 @@ This keeps each module focused, complete, and reviewable before moving on — ra
 
 ## Companion References (grow with every module)
 
-- **[Glossary.md](glossary.md)** — every technical term defined the moment it's introduced
 - **[Interview-Questions.md](interview-questions.md)** — consolidated interview Q&A across all modules
 - **[Cheat-Sheet.md](cheat-sheet.md)** — quick-reference syntax and comparisons
-- **[Exercises.md](exercises.md)** — consolidated practice problems across all modules
 
 ## How to read this course
 
@@ -104,7 +102,3 @@ This keeps each module focused, complete, and reviewable before moving on — ra
 3. Attempt exercises *before* checking answers.
 4. When a topic references a diagram, actually trace through it with your finger/cursor — don't skim it.
 5. Revisit the "Why" sections even if you already know "How" — most working developers can use Java but can't explain *why* it's built this way, and that gap shows up in interviews.
-
----
-
-*Course complete. All 24 modules, from first principles through interview readiness, are finished.*

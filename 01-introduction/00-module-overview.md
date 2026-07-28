@@ -14,7 +14,7 @@ By the end of this module, you will understand **what Java is, why it was create
 6. **[Setting Up Java](06-setting-up-java.md)** — Installing a JDK, verifying your setup, understanding `PATH` and `JAVA_HOME`, and choosing a JDK distribution.
 7. **[Your First Java Program](07-first-java-program.md)** — `HelloWorld.java` dissected keyword-by-keyword, plus common beginner mistakes.
 8. **[Java Editions & Version Timeline](08-java-editions-and-versions.md)** — Java SE vs EE vs ME, the LTS release model, and what changed in each major version through Java 25.
-9. **[Module Summary, Interview Questions & Exercises](09-module-summary-exercises.md)** — Consolidated recap, quiz, and practice problems.
+9. **[Module Summary](09-module-summary.md)** — Consolidated recap.
 
 ## Prerequisites
 
@@ -25,7 +25,3 @@ By the end of this module, you will understand **what Java is, why it was create
 ## How to Study This Module
 
 Read in order. Topics 1–3 build your conceptual model (what and why). Topic 4 clears up terminology. Topic 5 is the deepest and most important — read it twice if needed, it's the foundation for JVM Internals (Module 16) and Performance (Module 22) later. Topics 6–7 get your hands dirty. Topic 8 gives you the historical map so version numbers you'll see throughout the rest of the course ("added in Java 8," "since Java 17") make sense.
-
----
-
-**Next:** [01 — What Is Java?](01-what-is-java.md)

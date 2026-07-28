@@ -175,13 +175,3 @@ This mirrors a real-world analogy: think of a **car engine (JVM)**, the **whole 
 1. True or False: The JVM is platform-independent. *(False — bytecode is; the JVM is platform-specific.)*
 2. Which of the three (JVM/JRE/JDK) contains `javac`? *(Only the JDK.)*
 3. Which of the three is a specification with multiple different vendor implementations? *(The JVM.)*
-
-## Exercises
-
-1. Draw the JDK/JRE/JVM diagram from memory (without looking back), labeling what each layer adds on top of the one inside it.
-2. Explain, using the car/engine/garage analogy or one of your own, why bundling everything into one undifferentiated "Java installer" would be a worse design.
-3. Research (or recall from Topic 3) what "HotSpot" refers to, and explain how it relates to "the JVM."
-
----
-
-**Previous:** [03 — Features of Java](03-features-of-java.md) · **Next:** [05 — How Java Works Internally](05-how-java-works.md)
