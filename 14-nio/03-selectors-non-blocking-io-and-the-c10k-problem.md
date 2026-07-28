@@ -88,18 +88,19 @@ while (true) {
 ```
 
 ```
-       THREAD-PER-CONNECTION MODEL              SELECTOR-BASED MODEL
+              THREAD-PER-CONNECTION MODEL                 SELECTOR-BASED MODEL
 
-  Thread 1 ── blocks on ── Connection 1           ┌─────────────────────────┐
-  Thread 2 ── blocks on ── Connection 2           │      ONE thread            │
-  Thread 3 ── blocks on ── Connection 3           │   calling selector.select() │
-  ...                                                │                             │
-  Thread N ── blocks on ── Connection N           │   monitors ALL N              │
-                                                     │   connections AT ONCE          │
-  N threads, N stacks,                              └──────────┬──────────────┘
-  N sets of OS scheduling overhead                              │
-                                                          only wakes up when
-                                                          SOMETHING is actually ready
+ Thread 1 ── blocks on ── Connection 1           ┌────────────────────────────────────┐
+ Thread 2 ── blocks on ── Connection 2           │             ONE thread             │
+ Thread 3 ── blocks on ── Connection 3           │     calling selector.select()      │
+ ...                                             │                                    │
+ Thread N ── blocks on ── Connection N           │     monitors ALL N connections     │
+                                                 │             AT ONCE                │
+ N threads, N stacks,                            └────────────────┬───────────────────┘
+ N sets of OS scheduling overhead                                 │
+                                                                  ▼
+                                                    only wakes up when
+                                                    SOMETHING is actually ready
 ```
 
 **This is the real, mechanical answer to the C10K problem**: instead of N threads each blocked waiting on one connection, **one** thread efficiently waits on **all** N connections simultaneously, only doing actual work when there's genuinely something to do. `Selector.select()` itself is implemented using efficient, OS-level mechanisms (like `epoll` on Linux, `kqueue` on macOS/BSD) specifically designed for exactly this "wait on many things at once, efficiently" pattern — Java's `Selector` is a portable abstraction over these OS-specific facilities.
@@ -157,14 +158,3 @@ Think of thread-per-connection like **hiring one dedicated waiter for every sing
 - **Non-blocking I/O** makes `read()`/`write()` return immediately rather than waiting, reporting what's actually available right now.
 - **`Selector`** lets one thread efficiently monitor many channels at once, using OS-native mechanisms, solving C10K without one-thread-per-connection's overhead — at the real cost of more complex, event-loop-style code.
 - **Virtual Threads** (Module 15) offer a modern alternative, letting simple blocking-style code scale efficiently without hand-written NIO complexity — though NIO's underlying concepts remain foundational.
-
-## Exercises
-
-1. Explain, using concrete numbers (memory per thread, connection count), precisely why the thread-per-connection model becomes impractical at C10K scale.
-2. Explain the difference between a blocking `read()` call and a non-blocking one, in terms of what each actually does when no data is currently available.
-3. Explain why `Selector` is needed even after switching channels to non-blocking mode — what problem does it solve that non-blocking channels alone don't?
-4. In your own words, explain how Virtual Threads (previewed here, full depth Module 15) change the practical trade-off between "simple blocking code" and "scalable server design."
-
----
-
-**Previous:** [02 — Channels & Memory-Mapped Files](02-channels-and-memory-mapped-files.md) · **Next:** [04 — `WatchService` & Modern NIO Recap](04-watchservice-and-modern-nio-recap.md)

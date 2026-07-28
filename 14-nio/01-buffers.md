@@ -27,17 +27,21 @@ ByteBuffer buffer = ByteBuffer.allocate(1024);   // a NEW buffer, 1024 bytes cap
 Every `Buffer` (there are typed variants — `ByteBuffer`, `CharBuffer`, `IntBuffer`, etc. — `ByteBuffer` is by far the most commonly used, since raw I/O is fundamentally byte-based, Module 13, Topic 1) tracks **four** key properties:
 
 ```
- capacity:  the TOTAL, FIXED size of the buffer (set at creation, NEVER changes)
- limit:     the boundary past which you cannot read or write
- position:  the NEXT index that will be read from or written to
- mark:      a saved position you can return to later (less commonly used)
+ Buffer State
 
-  0                    position              limit         capacity
-  ├──────────────────────┼───────────────────┼─────────────┤
-  │   already processed    │   available to      │  unused        │
-  │   (already read/        │   read/write         │  buffer space   │
-  │    written)              │                       │                  │
-  └──────────────────────┴───────────────────┴─────────────┘
+capacity : the TOTAL, FIXED size of the buffer (set at creation, NEVER changes)
+limit    : the boundary past which you cannot read or write
+position : the NEXT index that will be read from or written to
+mark     : a saved position you can return to later (less commonly used)
+
+
+  0                     position                 limit               capacity
+  │                         │                      │                     │
+  ├─────────────────────────┼──────────────────────┼─────────────────────┤
+  │ already processed       │ available to         │ unused buffer space │
+  │ (already read/          │ read/write           │                     │
+  │  written)               │                      │                     │
+  └─────────────────────────┴──────────────────────┴─────────────────────┘
 ```
 
 **These four properties always satisfy: `0 <= mark <= position <= limit <= capacity`.**
@@ -69,17 +73,26 @@ while (buffer.hasRemaining()) {   // hasRemaining() == (position < limit)
 ```
 
 ```
- BEFORE flip() (write mode, just finished writing "Hi"):
-  0         position=2                                    capacity=1024
-  ├───────────┼──────────────────────────────────────────────┤
-  │  H,i         │                    (unused, but limit=capacity)         │
-  └───────────┴──────────────────────────────────────────────┘
+BEFORE flip() (write mode, just finished writing "Hi"):
 
- AFTER flip() (read mode):
-  0         limit=2                                          capacity=1024
-  ├───────────┤
-  │  H,i         │   <- position RESET to 0; limit marks the REAL data boundary
-  └───────────┘         (position advances 0 -> 1 -> 2 as get() is called)
+  0            position = 2                                      capacity = 1024
+  │                 │                                                   │
+  ├─────────────────┼───────────────────────────────────────────────────┤
+  │ H │ i │         unused buffer space (limit = capacity)              │
+  └─────────────────┴───────────────────────────────────────────────────┘
+
+
+AFTER flip() (read mode):
+
+  0       position = 0      limit = 2                    capacity = 1024
+  │            │                │                               │
+  ├────────────┼────────────────┤───────────────────────────────┤
+  │ H │ i │                    unused buffer space              │
+  └────────────┴────────────────┴───────────────────────────────┘
+
+position is RESET to 0.
+limit marks the REAL data boundary.
+As get() is called, position advances: 0 → 1 → 2.
 ```
 
 **Why is `flip()` needed at all, rather than the buffer just "knowing" it's time to read?** The buffer has **no inherent concept** of "I'm done writing now" — from its perspective, `position` just tracks "how far writing has progressed so far." `flip()` is the **explicit, deliberate signal** that converts "how much I've written" (`position`) into "how much valid data exists to read" (the new `limit`), and resets the read cursor to the start. **Forgetting to call `flip()` before reading is, by a wide margin, the single most common NIO bug** — without it, you'd start "reading" from wherever writing happened to leave off, generally reading garbage/unused buffer space, or immediately finding `hasRemaining()` false since `position` already equals the old `limit`.
@@ -143,13 +156,3 @@ Think of a `ByteBuffer` like a **whiteboard with a moving "current writing posit
 - NIO's `Buffer` tracks **capacity** (fixed), **limit** (read/write boundary), and **position** (next read/write index), always satisfying `0 <= position <= limit <= capacity`.
 - **`flip()`** switches a buffer from write mode to read mode (`limit = position`, `position = 0`) — the single most important, most commonly forgotten NIO operation.
 - **`clear()`** resets for fresh writing; **`rewind()`** re-reads existing data; **`compact()`** preserves unread data while making room for more writing.
-
-## Exercises
-
-1. Write code that puts three bytes into a `ByteBuffer`, correctly flips it, reads them back with a loop using `hasRemaining()`, and prints them.
-2. Explain, step by step, what happens to `position` and `limit` at each stage of: allocate → put 5 bytes → flip → get 2 bytes → compact.
-3. Explain why forgetting to call `flip()` before reading typically results in either garbage output or an immediately-empty read, referencing the position/limit relationship precisely.
-
----
-
-**Previous:** [00 — Module Overview](00-module-overview.md) · **Next:** [02 — Channels & Memory-Mapped Files](02-channels-and-memory-mapped-files.md)
