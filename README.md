@@ -90,10 +90,6 @@ This keeps each module focused, complete, and reviewable before moving on — ra
 | 23 | [Modern Java](23-modern-java/) | ✅ Complete | Records, sealed classes, pattern matching, through Java 25 |
 | 24 | [Interview Preparation](24-interview-preparation/) | ✅ Complete | Consolidated interview questions and mock scenarios |
 
-## Companion References (grow with every module)
-
-- **[Interview-Questions.md](interview-questions.md)** — consolidated interview Q&A across all modules
-
 ## How to read this course
 
 1. Go in order. Module 3 assumes Module 2. Module 5 assumes Modules 1–4.
